@@ -1,0 +1,61 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="AssistantFallDetector.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True"
+    DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
+
+    <phone:Pivot Title="FallDetector">
+        <phone:PivotItem Header="acelerómetro">
+            <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>status:</TextBlock>
+                    <TextBlock Name="statusTextBlock"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>time between updates:</TextBlock>
+                    <TextBlock Name="timeBetweenUpdatesTextBlock"></TextBlock>
+                </StackPanel>
+                <TextBlock Text="acceleration:"></TextBlock>
+
+                <TextBlock Text="X Axis:" Foreground="Red" FontWeight="Bold">
+                </TextBlock>
+                <TextBlock x:Name="xAxis" Text="{Binding Data.XAxis}" FontSize="24"/>
+
+                <TextBlock Text="Y Axis:" Foreground="Green" FontWeight="Bold">
+                </TextBlock>
+                <TextBlock x:Name="yAxis" Text="{Binding Data.YAxis}" FontSize="24"/>
+
+                <TextBlock Text="Z Axis:" Foreground="Blue" FontWeight="Bold">
+                </TextBlock>
+                <TextBlock x:Name="zAxis" Text="{Binding Data.ZAxis}" FontSize="24"/>
+
+                <TextBlock Text="Acceleration:" Foreground="White" FontWeight="Bold">
+                </TextBlock>
+                <TextBlock Text="{Binding Data.Acceleration}" FontSize="24"/>
+                <Grid Height="10">
+                    <Line X1="0" Y1="0" X2="{Binding GraphData.AccelerationLine}" Y2="0" Stroke="White" StrokeThickness="4"></Line>
+                </Grid>
+                
+                <Grid Height="300">
+                    <Line X1="{Binding GraphData.XLineX1}" Y1="{Binding GraphData.XLineY1}" X2="{Binding GraphData.XLineX2}" Y2="{Binding GraphData.XLineY2}" Stroke="Red" StrokeThickness="4"></Line>
+                    <Line X1="{Binding GraphData.YLineX1}" Y1="{Binding GraphData.YLineY1}" X2="{Binding GraphData.YLineX2}" Y2="{Binding GraphData.YLineY2}" Stroke="Green" StrokeThickness="4"></Line>
+                    <Line X1="{Binding GraphData.ZLineX1}" Y1="{Binding GraphData.ZLineY1}" X2="{Binding GraphData.ZLineX2}" Y2="{Binding GraphData.ZLineY2}" Stroke="Blue" StrokeThickness="4"></Line>
+                </Grid>
+            </StackPanel>
+        </phone:PivotItem>
+        <phone:PivotItem Header="giroscopio">
+            <TextBlock Text="HOLA" FontSize="24"/>
+        </phone:PivotItem>
+    </phone:Pivot>
+    
+</phone:PhoneApplicationPage>
