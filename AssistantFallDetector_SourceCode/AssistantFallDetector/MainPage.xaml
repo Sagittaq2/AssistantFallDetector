@@ -53,8 +53,26 @@
                 </Grid>
             </StackPanel>
         </phone:PivotItem>
-        <phone:PivotItem Header="giroscopio">
-            <TextBlock Text="HOLA" FontSize="24"/>
+        <phone:PivotItem Header="ubicación">
+            <Grid x:Name="LayoutRoot" Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!--TitlePanel contains the name of the application and page title-->
+                <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+                    <TextBlock Text="BACKGROUND GPS" Style="{StaticResource PhoneTextNormalStyle}" Margin="0"
+                       FontSize="22"/>
+                </StackPanel>
+
+                <!--ContentPanel - place additional content here-->
+                <Grid x:Name="ContentPanel2" Grid.Row="1" Margin="12,0,12,0">
+                    <ListBox ItemsSource="{Binding Coordinates}"
+                     FontSize="22">
+                    </ListBox>
+                </Grid>
+            </Grid>
         </phone:PivotItem>
     </phone:Pivot>
     

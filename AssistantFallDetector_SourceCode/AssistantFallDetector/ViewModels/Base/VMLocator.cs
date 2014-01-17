@@ -17,6 +17,7 @@ namespace AssistantFallDetector.ViewModels.Base
             ContainerBuilder builder = new ContainerBuilder();
 
             builder.RegisterType<AccelerometerService>().As<IAccelerometerService>();
+            builder.RegisterType<GpsService>().As<IGpsService>();
             builder.RegisterType<DispatcherService>().As<IDispatcherService>();
             builder.RegisterType<VMMainPage>();
 
@@ -27,5 +28,6 @@ namespace AssistantFallDetector.ViewModels.Base
         {
             get { return container.Resolve<VMMainPage>(); }
         }
+
     }
 }

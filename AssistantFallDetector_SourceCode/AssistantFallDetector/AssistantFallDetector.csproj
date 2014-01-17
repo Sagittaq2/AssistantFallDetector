@@ -107,8 +107,10 @@
     </Compile>
     <Compile Include="Services\AccelerometerService.cs" />
     <Compile Include="Services\DispatcherService.cs" />
+    <Compile Include="Services\GpsService.cs" />
     <Compile Include="Services\IAccelerometerService.cs" />
     <Compile Include="Services\IDispatcherService.cs" />
+    <Compile Include="Services\IGpsService.cs" />
     <Compile Include="ViewModels\Base\DelegateCommand.cs" />
     <Compile Include="ViewModels\Base\VMBase.cs" />
     <Compile Include="ViewModels\Base\VMLocator.cs" />
@@ -125,6 +127,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Include="AssistantFallDetector_2013_12_23_21_04_28.sap" />
+    <None Include="AssistantFallDetector_2013_12_23_21_12_42.sap" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>

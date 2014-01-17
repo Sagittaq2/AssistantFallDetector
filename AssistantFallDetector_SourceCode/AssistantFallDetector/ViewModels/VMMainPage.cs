@@ -7,6 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
+using Windows.Devices.Geolocation;
+using System.ServiceModel;
+using Windows.UI.Core;
+using System.Collections.ObjectModel;
 
 namespace AssistantFallDetector.ViewModels
 {
@@ -16,13 +21,19 @@ namespace AssistantFallDetector.ViewModels
         private IDispatcherService dispatcherService;
         private AccelerometerData data;
         private AccelerometerGraphData graphData;
+        
+        private ObservableCollection<string> coordinates = new ObservableCollection<string>();
+        private IGpsService gpsService;
 
-        public VMMainPage(IAccelerometerService accelerometerService, IDispatcherService dispatcherService)
+        public VMMainPage(IAccelerometerService accelerometerService, IGpsService gpsService, IDispatcherService dispatcherService)
         {
             this.accelerometerService = accelerometerService;
+            this.gpsService = gpsService;
             this.dispatcherService = dispatcherService;
 
             this.accelerometerService.AccelerometerReadingChanged += accelerometerService_AccelerometerReadingChanged;
+            this.gpsService.GpsPositionChanged += gpsService_GpsPositionChanged;
+
             try
             {
                 this.accelerometerService.InitializeAccelerometer();
@@ -69,6 +80,32 @@ namespace AssistantFallDetector.ViewModels
             {
                 this.graphData = value;
                 RaisePropertyChanged();
+            }
+        }
+
+        public ObservableCollection<string> Coordinates
+        {
+            get { return coordinates; }
+            set
+            {
+                coordinates = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
+        private void gpsService_GpsPositionChanged(Geocoordinate coord)
+        {
+            if (coord != null)
+            {
+                this.dispatcherService.CallDispatcher(() =>
+                {
+                    string coordinates = string.Format("{0}:\n    {1} , {2}",
+                                                        coord.Timestamp.ToUniversalTime(),
+                                                        coord.Latitude,
+                                                        coord.Longitude);
+                    Coordinates.Add(coordinates);
+                });
             }
         }
 
