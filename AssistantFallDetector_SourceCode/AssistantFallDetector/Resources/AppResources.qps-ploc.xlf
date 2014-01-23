@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="qps-ploc" original="AppResources.resx" tool-id="MultilingualAppToolkit" product-name="AssistantFallDetector" product-version="1.0.0.0" build-num="0">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="2.1.2010.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="Resx">
+        <trans-unit translate="yes" id="Resx/ResourceFlowDirection" xml:space="preserve">
+          <source>LeftToRight</source>
+          <target state="translated">LeftToRight</target>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Controls the FlowDirection for all elements in the RootFrame. Set to the traditional direction of this resource file's language</note></trans-unit>
+        <trans-unit translate="yes" id="Resx/ResourceLanguage" xml:space="preserve">
+          <source>en-US</source>
+          <target state="translated">qps-ploc</target>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</note></trans-unit>
+        <trans-unit translate="yes" id="Resx/ApplicationTitle" xml:space="preserve">
+          <source>Assistant Fall Detector</source>
+          <target state="new">Assistant Fall Detector</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/AppBarButtonText" xml:space="preserve">
+          <source>add</source>
+          <target state="translated">[add</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/AppBarMenuItemText" xml:space="preserve">
+          <source>Menu Item</source>
+          <target state="translated">Menu Item</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageAccelerometerTitleText" xml:space="preserve">
+          <source>accelerometer</source>
+          <target state="new">accelerometer</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageSettingsTitleText" xml:space="preserve">
+          <source>settings</source>
+          <target state="new">settings</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageAccelerometerAccelerationMaxText" xml:space="preserve">
+          <source>acceleration maximum reached (G)</source>
+          <target state="new">acceleration maximum reached (G)</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageAccelerometerZAxisText" xml:space="preserve">
+          <source>Z Axis (G)</source>
+          <target state="new">Z Axis (G)</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageAccelerometerYAxisText" xml:space="preserve">
+          <source>Y Axis (G)</source>
+          <target state="new">Y Axis (G)</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageAccelerometerXAxisText" xml:space="preserve">
+          <source>X Axis (G)</source>
+          <target state="new">X Axis (G)</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageAccelerometerTimeUpdatesText" xml:space="preserve">
+          <source>time between updates (ms)</source>
+          <target state="new">time between updates (ms)</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageAccelerometerStatusText" xml:space="preserve">
+          <source>status</source>
+          <target state="new">status</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageAccelerometerAccelerationText" xml:space="preserve">
+          <source>acceleration (G)</source>
+          <target state="new">acceleration (G)</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageSettingsWifiText" xml:space="preserve">
+          <source>WiFi</source>
+          <target state="new">WiFi</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageLocationGPSBckgTitleText" xml:space="preserve">
+          <source>BACKGROUND GPS</source>
+          <target state="new">BACKGROUND GPS</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageContactsSearchFilterText" xml:space="preserve">
+          <source>search</source>
+          <target state="new">search</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageContactDetailsTitleText" xml:space="preserve">
+          <source>contact details</source>
+          <target state="new">contact details</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPagePopupSendNotificationButtonText" xml:space="preserve">
+          <source>send notification</source>
+          <target state="new">send notification</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPagePopupTitleText" xml:space="preserve">
+          <source>Warning</source>
+          <target state="new">Warning</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/NotificationAlarmText" xml:space="preserve">
+          <source>The alarm threshold has been exceeded</source>
+          <target state="new">The alarm threshold has been exceeded</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageSettingsPhoneNumberFavoriteContactText" xml:space="preserve">
+          <source>phone number of favorite contact</source>
+          <target state="new">phone number of favorite contact</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageContactsLoadingLabelText3" xml:space="preserve">
+          <source>no results</source>
+          <target state="new">no results</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/ContactDetailsPageDialogLeftButtonText" xml:space="preserve">
+          <source>continue</source>
+          <target state="new">continue</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/ContactDetailsPageDialogMessage3" xml:space="preserve">
+          <source>has been added to send alarm notifications.</source>
+          <target state="new">has been added to send alarm notifications.</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageSettingsIdleTimeAccelerationAlarmText" xml:space="preserve">
+          <source>Time idle to launch the notification (ms)</source>
+          <target state="new">Time idle to launch the notification (ms)</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageAccelerometerStateAlarmText3" xml:space="preserve">
+          <source>idle time finished</source>
+          <target state="new">idle time finished</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageAccelerometerStateAlarmText2" xml:space="preserve">
+          <source>threshold reached</source>
+          <target state="new">threshold reached</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageAccelerometerStateAlarmText1" xml:space="preserve">
+          <source>normal</source>
+          <target state="new">normal</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageAccelerometerStateAlarmText" xml:space="preserve">
+          <source>recognition phase alarm</source>
+          <target state="new">recognition phase alarm</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/ContactDetailsPageDialogMessage2" xml:space="preserve">
+          <source>of the selected contact</source>
+          <target state="new">of the selected contact</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/ContactDetailsPageDialogMessage1" xml:space="preserve">
+          <source>The number</source>
+          <target state="new">The number</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/ContactDetailsPageDialogCaption" xml:space="preserve">
+          <source>Favorite contact number added</source>
+          <target state="new">Favorite contact number added</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageContactsLoadingLabelText2" xml:space="preserve">
+          <source>results (tap name for details...)</source>
+          <target state="new">results (tap name for details...)</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageContactsLoadingLabelText1" xml:space="preserve">
+          <source>results are loading...</source>
+          <target state="new">results are loading...</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPagePopupDescriptionText" xml:space="preserve">
+          <source>the alarm threshold has been exceeded!</source>
+          <target state="new">the alarm threshold has been exceeded!</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPagePopupAckButtonText" xml:space="preserve">
+          <source>ack</source>
+          <target state="new">ack</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageContactsResultsLabelText" xml:space="preserve">
+          <source>Search for contacts</source>
+          <target state="new">Search for contacts</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageContactsPhoneFilterText" xml:space="preserve">
+          <source>phone</source>
+          <target state="new">phone</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageContactsNameFilterText" xml:space="preserve">
+          <source>name</source>
+          <target state="new">name</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageContactsEmailFilterText" xml:space="preserve">
+          <source>email</source>
+          <target state="new">email</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageSettingsAccelerometerModeText" xml:space="preserve">
+          <source>accelerometer</source>
+          <target state="new">accelerometer</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageSettingsAccelerationAlarmText" xml:space="preserve">
+          <source>Acceleration alarm (G)</source>
+          <target state="new">Acceleration alarm (G)</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageAppBarRefreshText" xml:space="preserve">
+          <source>refresh</source>
+          <target state="new">refresh</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageLocationTitleText" xml:space="preserve">
+          <source>location</source>
+          <target state="new">location</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MainPageContactsTitleText" xml:space="preserve">
+          <source>contacts</source>
+          <target state="new">contacts</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

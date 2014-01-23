@@ -8,11 +8,16 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using AssistantFallDetector.Resources;
 using System.Windows.Threading;
+using AssistantFallDetector.Entities;
 
 namespace AssistantFallDetector
 {
     public partial class App : Application
     {
+        public static Microsoft.Phone.UserData.Contact con;
+        public static Microsoft.Phone.UserData.Appointment appt;
+        public static ApplicationSettingsData ApplicationSettings { get; private set; }
+
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
@@ -63,6 +68,8 @@ namespace AssistantFallDetector
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
+
+            ApplicationSettings = new ApplicationSettingsData();
 
         }
 

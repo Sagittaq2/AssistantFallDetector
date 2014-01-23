@@ -25,7 +25,9 @@ namespace AssistantFallDetector.Services
         void locator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
             if (GpsPositionChanged != null)
+            {
                 GpsPositionChanged(args.Position.Coordinate);
+            }
         }
 
         public async Task<Geocoordinate> GetGpsCoordinates()
@@ -33,6 +35,13 @@ namespace AssistantFallDetector.Services
             var position = await locator.GetGeopositionAsync();
 
             return position.Coordinate;
+        }
+
+        public async Task<CivicAddress> GetGpsCivicAddress()
+        {
+            var position = await locator.GetGeopositionAsync();
+
+            return position.CivicAddress;
         }
     }
 }

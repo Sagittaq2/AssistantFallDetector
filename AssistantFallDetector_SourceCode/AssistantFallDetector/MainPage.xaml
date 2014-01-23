@@ -4,8 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="clr-namespace:AssistantFallDetector.Converters"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -13,47 +15,71 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
     DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
+    
+    <phone:PhoneApplicationPage.Resources>
+        <converters:ContactToPictureConverter x:Key="ContactToPicture"></converters:ContactToPictureConverter>
+    </phone:PhoneApplicationPage.Resources>
 
-    <phone:Pivot Title="FallDetector">
-        <phone:PivotItem Header="acelerómetro">
-            <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+    <phone:Pivot Title="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}">
+        <phone:PivotItem Header="{Binding LocalizedResources.MainPageAccelerometerTitleText, Source={StaticResource LocalizedStrings}}">
+            <StackPanel x:Name="ContentPanel" Margin="12,0,12,0">
+                <Popup x:Name="Popup" IsOpen="{Binding Popup, Mode=TwoWay}" >
+                    <Border  BorderThickness="2" Margin="10" BorderBrush="Green">
+                        <StackPanel Background="LightBlue">
+                            <Image Source="/Images/disclaimer.png" HorizontalAlignment="Center" Stretch="Fill" Margin="0,15,0,5"/>
+                            <TextBlock Text="{Binding LocalizedResources.MainPagePopupTitleText, Source={StaticResource LocalizedStrings}}" TextAlignment="Center" FontSize="40" Margin="10,0" />
+                            <TextBlock Text="{Binding LocalizedResources.MainPagePopupDescriptionText, Source={StaticResource LocalizedStrings}}" FontSize="21" Margin="10,0" />
+                            <StackPanel Orientation="Horizontal" Margin="0,10">
+                                <Button x:Name="btn_continue"  Content="{Binding LocalizedResources.MainPagePopupAckButtonText, Source={StaticResource LocalizedStrings}}" Width="215" Command="{Binding AckAlarmCommand}" />
+                                <Button x:Name="btn_cancel"    Content="{Binding LocalizedResources.MainPagePopupSendNotificationButtonText, Source={StaticResource LocalizedStrings}}"   Width="215" Command="{Binding SendNotificationAlarmCommand}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </Popup>
+
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock>status:</TextBlock>
-                    <TextBlock Name="statusTextBlock"></TextBlock>
+                    <TextBlock Text="{Binding LocalizedResources.MainPageAccelerometerTimeUpdatesText, Source={StaticResource LocalizedStrings}}" Padding="0,0,20,0" />
+                    <TextBlock Text="{Binding AData.ReportInterval}"></TextBlock>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock>time between updates:</TextBlock>
-                    <TextBlock Name="timeBetweenUpdatesTextBlock"></TextBlock>
+                
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding LocalizedResources.MainPageAccelerometerXAxisText, Source={StaticResource LocalizedStrings}}" Foreground="Red" FontWeight="Bold" HorizontalAlignment="Left" Padding="0,0,20,0" />
+                        <TextBlock x:Name="xAxis" Text="{Binding AData.XAxis}" FontSize="24" />                  
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding LocalizedResources.MainPageAccelerometerYAxisText, Source={StaticResource LocalizedStrings}}" Foreground="Green" FontWeight="Bold" Padding="0,0,20,0" />
+                    <TextBlock x:Name="yAxis" Text="{Binding AData.YAxis}" FontSize="24"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding LocalizedResources.MainPageAccelerometerZAxisText, Source={StaticResource LocalizedStrings}}" Foreground="Blue" FontWeight="Bold" Padding="0,0,20,0" />
+                        <TextBlock x:Name="zAxis" Text="{Binding AData.ZAxis}" FontSize="24"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding LocalizedResources.MainPageAccelerometerAccelerationText, Source={StaticResource LocalizedStrings}}" Foreground="White" FontWeight="Bold" Padding="0,0,20,0" />
+                        <TextBlock x:Name="acceleration" Text="{Binding AData.Acceleration}" FontSize="24"/>
+                    </StackPanel>
+                    
+                    <TextBlock Text="{Binding LocalizedResources.MainPageAccelerometerAccelerationMaxText, Source={StaticResource LocalizedStrings}}" Foreground="White" FontWeight="Bold" />
+                    <TextBlock x:Name="xAxisMax" Text="{Binding AMaxData.XAxisMax}" FontSize="24" Foreground="Red" />
+                    <TextBlock x:Name="yAxisMax" Text="{Binding AMaxData.YAxisMax}" FontSize="24" Foreground="Green" />
+                    <TextBlock x:Name="zAxisMax" Text="{Binding AMaxData.ZAxisMax}" FontSize="24" Foreground="Blue"/>
+                    <TextBlock x:Name="accelerationMax" Text="{Binding AMaxData.AccelerationMax}" FontSize="24"/>
+
+                    <TextBlock Text="{Binding LocalizedResources.MainPageAccelerometerStateAlarmText, Source={StaticResource LocalizedStrings}}" Foreground="White" FontWeight="Bold" />
+                    <TextBlock x:Name="stateAlarm" Text="{Binding StateAlarm}" FontSize="24"/>
                 </StackPanel>
-                <TextBlock Text="acceleration:"></TextBlock>
-
-                <TextBlock Text="X Axis:" Foreground="Red" FontWeight="Bold">
-                </TextBlock>
-                <TextBlock x:Name="xAxis" Text="{Binding Data.XAxis}" FontSize="24"/>
-
-                <TextBlock Text="Y Axis:" Foreground="Green" FontWeight="Bold">
-                </TextBlock>
-                <TextBlock x:Name="yAxis" Text="{Binding Data.YAxis}" FontSize="24"/>
-
-                <TextBlock Text="Z Axis:" Foreground="Blue" FontWeight="Bold">
-                </TextBlock>
-                <TextBlock x:Name="zAxis" Text="{Binding Data.ZAxis}" FontSize="24"/>
-
-                <TextBlock Text="Acceleration:" Foreground="White" FontWeight="Bold">
-                </TextBlock>
-                <TextBlock Text="{Binding Data.Acceleration}" FontSize="24"/>
-                <Grid Height="10">
-                    <Line X1="0" Y1="0" X2="{Binding GraphData.AccelerationLine}" Y2="0" Stroke="White" StrokeThickness="4"></Line>
-                </Grid>
                 
                 <Grid Height="300">
-                    <Line X1="{Binding GraphData.XLineX1}" Y1="{Binding GraphData.XLineY1}" X2="{Binding GraphData.XLineX2}" Y2="{Binding GraphData.XLineY2}" Stroke="Red" StrokeThickness="4"></Line>
-                    <Line X1="{Binding GraphData.YLineX1}" Y1="{Binding GraphData.YLineY1}" X2="{Binding GraphData.YLineX2}" Y2="{Binding GraphData.YLineY2}" Stroke="Green" StrokeThickness="4"></Line>
-                    <Line X1="{Binding GraphData.ZLineX1}" Y1="{Binding GraphData.ZLineY1}" X2="{Binding GraphData.ZLineX2}" Y2="{Binding GraphData.ZLineY2}" Stroke="Blue" StrokeThickness="4"></Line>
+                    <Line X1="{Binding AGraphData.XLineX1}" Y1="{Binding AGraphData.XLineY1}" X2="{Binding AGraphData.XLineX2}" Y2="{Binding AGraphData.XLineY2}" Stroke="Red" StrokeThickness="4"></Line>
+                    <Line X1="{Binding AGraphData.YLineX1}" Y1="{Binding AGraphData.YLineY1}" X2="{Binding AGraphData.YLineX2}" Y2="{Binding AGraphData.YLineY2}" Stroke="Green" StrokeThickness="4"></Line>
+                    <Line X1="{Binding AGraphData.ZLineX1}" Y1="{Binding AGraphData.ZLineY1}" X2="{Binding AGraphData.ZLineX2}" Y2="{Binding AGraphData.ZLineY2}" Stroke="Blue" StrokeThickness="4"></Line>
                 </Grid>
-            </StackPanel>
+
+            </StackPanel>           
         </phone:PivotItem>
-        <phone:PivotItem Header="ubicación">
+        
+        <phone:PivotItem Header="{Binding LocalizedResources.MainPageLocationTitleText, Source={StaticResource LocalizedStrings}}">
             <Grid x:Name="LayoutRoot" Background="Transparent">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -62,7 +88,7 @@
 
                 <!--TitlePanel contains the name of the application and page title-->
                 <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-                    <TextBlock Text="BACKGROUND GPS" Style="{StaticResource PhoneTextNormalStyle}" Margin="0"
+                    <TextBlock Text="{Binding LocalizedResources.MainPageLocationGPSBckgTitleText, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" Margin="0"
                        FontSize="22"/>
                 </StackPanel>
 
@@ -74,6 +100,63 @@
                 </Grid>
             </Grid>
         </phone:PivotItem>
+
+        <phone:PivotItem Header="{Binding LocalizedResources.MainPageContactsTitleText, Source={StaticResource LocalizedStrings}}">
+            <StackPanel Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBox Name="contactFilterString" Grid.Row="0" Grid.ColumnSpan="2" />
+                    <RadioButton x:Name="contactFilterName" Content="{Binding LocalizedResources.MainPageContactsNameFilterText, Source={StaticResource LocalizedStrings}}" Grid.Row="1" Grid.Column="0" Checked="FilterChange" />
+                    <RadioButton x:Name="contactFilterPhone" Content="{Binding LocalizedResources.MainPageContactsPhoneFilterText, Source={StaticResource LocalizedStrings}}" Grid.Row="1" Grid.Column="1" Checked="FilterChange" />
+                    <RadioButton x:Name="contactFilterEmail" Content="{Binding LocalizedResources.MainPageContactsEmailFilterText, Source={StaticResource LocalizedStrings}}" Grid.Row="2" Grid.Column="0" Checked="FilterChange" />
+                    <Button Grid.Row="2" Grid.Column="1" Content="{Binding LocalizedResources.MainPageContactsSearchFilterText, Source={StaticResource LocalizedStrings}}" Click="SearchContacts_Click" />
+                </Grid>
+
+                <TextBlock x:Name="contactResultsLabel" Text="{Binding LocalizedResources.MainPageContactsResultsLabelText, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Margin="12,0,0,0" />
+
+                <ListBox x:Name="contactResultsData" ItemsSource="{Binding}" Tap="ContactResultsData_Tap" Height="300" Margin="24,0,0,0" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" >
+                                <Border BorderThickness="2" HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="{StaticResource PhoneAccentBrush}" >
+                                    <Image Source="{Binding Converter={StaticResource ContactToPicture}}" Width="48" Height="48" Stretch="Fill"  />
+                                </Border>
+                                <TextBlock Name="contactResults" Text="{Binding Path=DisplayName, Mode=OneWay}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" Margin="18,8,0,0" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </phone:PivotItem>
+
+        <phone:PivotItem Header="{Binding LocalizedResources.MainPageSettingsTitleText, Source={StaticResource LocalizedStrings}}">
+            <!--Settings resources-->               
+            <StackPanel x:Name="SettingsPanel">              
+                <TextBlock Text="{Binding LocalizedResources.MainPageSettingsAccelerationAlarmText, Source={StaticResource LocalizedStrings}}" />                
+                <Slider x:Name="AccelerationAlarmSlider" Minimum="1" Maximum="3" SmallChange="0.1" LargeChange="0.5" 
+                        Value="{Binding AccelerationAlarmSetting, Mode=TwoWay}" />
+                <TextBlock Text="{Binding ElementName=AccelerationAlarmSlider,Path=Value}" HorizontalAlignment="Center" />
+
+                <TextBlock Text="{Binding LocalizedResources.MainPageSettingsIdleTimeAccelerationAlarmText, Source={StaticResource LocalizedStrings}}" />
+                <Slider x:Name="IdleTimeAccelerationAlarmSlider" Minimum="0" Maximum="10000" SmallChange="500" LargeChange="1000" 
+                        Value="{Binding IdleTimeAccelerationAlarmSetting, Mode=TwoWay}" />
+                <TextBlock Text="{Binding ElementName=IdleTimeAccelerationAlarmSlider,Path=Value}" HorizontalAlignment="Center" />                
+                <!--<toolkit:ToggleSwitch Header="{Binding LocalizedResources.MainPageSettingsAccelerometerModeText, Source={StaticResource LocalizedStrings}}" 
+                                      IsChecked="{Binding AccelerometerMode, Mode=TwoWay}" />-->
+                <TextBlock Text="{Binding LocalizedResources.MainPageSettingsPhoneNumberFavoriteContactText, Source={StaticResource LocalizedStrings}}" />
+                <TextBox Text="{Binding PhoneNumberFavoriteContactSetting, Mode=TwoWay}" />
+            </StackPanel>
+        </phone:PivotItem>
+
     </phone:Pivot>
     
 </phone:PhoneApplicationPage>

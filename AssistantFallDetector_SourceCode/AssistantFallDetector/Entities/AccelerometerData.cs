@@ -20,5 +20,7 @@ namespace AssistantFallDetector.Entities
 
         public double Acceleration { get; set; }
 
+        public uint ReportInterval { get; set; }
+
     }
 }

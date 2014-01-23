@@ -25,7 +25,6 @@ namespace AssistantFallDetector.Entities
             this.ZLineX2 = 190;
             this.ZLineY2 = 200;
 
-            this.AccelerationLine = 200;
         }
 
         public double XLineX1 { get; set; }
@@ -51,8 +50,6 @@ namespace AssistantFallDetector.Entities
         public double ZLineX2 { get; set; }
 
         public double ZLineY2 { get; set; }
-
-        public double AccelerationLine { get; set; }
 
     }
 }

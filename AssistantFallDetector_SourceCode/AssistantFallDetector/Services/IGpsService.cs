@@ -15,5 +15,6 @@ namespace AssistantFallDetector.Services
         event PositionChangedArg GpsPositionChanged;
 
         Task<Geocoordinate> GetGpsCoordinates();
+        Task<CivicAddress> GetGpsCivicAddress();
     }
 }

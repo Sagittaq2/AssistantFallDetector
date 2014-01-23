@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
+  <Languages xmlns="">
+    <Language code="es" />
+    <Language code="qps-ploc" />
+  </Languages>
   <App xmlns="" ProductID="{71698298-6227-4e31-b543-fd45e6e90e4d}" Title="AssistantFallDetector" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="AssistantFallDetector author" Description="Sample description" Publisher="AssistantFallDetector" PublisherID="{911e7f55-339e-4b63-b1f3-ceeddf8e3d1a}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
@@ -10,9 +14,10 @@
       <Capability Name="ID_CAP_SENSORS" />
       <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
       <Capability Name="ID_CAP_LOCATION" />
+      <Capability Name="ID_CAP_CONTACTS" />
     </Capabilities>
     <Tasks>
-      <DefaultTask Name="_default" NavigationPage="MainPage.xaml">
+      <DefaultTask Name="_default" NavigationPage="MainPage.xaml" ActivationPolicy="Resume">
         <BackgroundExecution>
           <ExecutionType Name="LocationTracking" />
         </BackgroundExecution>

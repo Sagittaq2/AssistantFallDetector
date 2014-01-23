@@ -10,7 +10,11 @@ namespace AssistantFallDetector.Services
 {
     public class AccelerometerService : IAccelerometerService
     {
+        public event AccelerometerReadData AccelerometerReadingChanged;
+
         Accelerometer accelerometer;
+        //private const double G = 0.981;
+        private const double G = 1;
 
         public void InitializeAccelerometer()
         {
@@ -28,14 +32,18 @@ namespace AssistantFallDetector.Services
             {
                 AccelerometerData data = new AccelerometerData()
                 {
-                    XAxis = args.Reading.AccelerationX,
-                    YAxis = args.Reading.AccelerationY,
-                    ZAxis = args.Reading.AccelerationZ,
-                    Acceleration = (Math.Abs(Math.Sqrt(Math.Pow(args.Reading.AccelerationX,2) + Math.Pow(args.Reading.AccelerationY,2) + Math.Pow(args.Reading.AccelerationZ,2))) - 1)
+                    ReportInterval = accelerometer.ReportInterval,
+                    XAxis = Math.Round(args.Reading.AccelerationX, 3),
+                    YAxis = Math.Round(args.Reading.AccelerationY, 3),
+                    ZAxis = Math.Round(args.Reading.AccelerationZ, 3),
+                    Acceleration = Math.Round((Math.Abs(Math.Sqrt(Math.Pow(args.Reading.AccelerationX,2) + Math.Pow(args.Reading.AccelerationY,2) + Math.Pow(args.Reading.AccelerationZ,2)))) - G, 3),                    
                 };
 
                 if (AccelerometerReadingChanged != null)
                     AccelerometerReadingChanged(data);
+
+                //Mirar si se ha alcanzado el umbral y enviar notificación Raw
+
             }
         }
 
@@ -52,13 +60,13 @@ namespace AssistantFallDetector.Services
 
             return new AccelerometerData()
             {
-                XAxis = result.AccelerationX,
-                YAxis = result.AccelerationY,
-                ZAxis = result.AccelerationZ,
-                Acceleration = (Math.Abs(Math.Sqrt(Math.Pow(result.AccelerationX,2) + Math.Pow(result.AccelerationY,2) + Math.Pow(result.AccelerationZ,2))) - 1)
+                ReportInterval = accelerometer.ReportInterval,
+                XAxis = Math.Round(result.AccelerationX, 3),
+                YAxis = Math.Round(result.AccelerationY ,3),
+                ZAxis = Math.Round(result.AccelerationZ, 3),
+                Acceleration = Math.Round((Math.Abs(Math.Sqrt(Math.Pow(result.AccelerationX, 2) + Math.Pow(result.AccelerationY, 2) + Math.Pow(result.AccelerationZ, 2)))) - G, 3)
             };
         }
 
-        public event AccelerometerReadData AccelerometerReadingChanged;
     }
 }

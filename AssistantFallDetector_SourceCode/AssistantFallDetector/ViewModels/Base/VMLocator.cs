@@ -18,8 +18,10 @@ namespace AssistantFallDetector.ViewModels.Base
 
             builder.RegisterType<AccelerometerService>().As<IAccelerometerService>();
             builder.RegisterType<GpsService>().As<IGpsService>();
+            builder.RegisterType<SmsService>().As<ISmsService>();
             builder.RegisterType<DispatcherService>().As<IDispatcherService>();
             builder.RegisterType<VMMainPage>();
+            builder.RegisterType<VMContactDetailsPage>();
 
             container = builder.Build();
         }

@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!--
-    Microsoft ResX Schema
-
+  <!-- 
+    Microsoft ResX Schema 
+    
     Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
     associated with the data types.
-
+    
     Example:
-
+    
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-
-    There are any number of "resheader" rows that contain simple
+                
+    There are any number of "resheader" rows that contain simple 
     name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
     mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
     read any of the formats listed below.
-
+    
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
+    value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -126,12 +126,135 @@
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
-    <value>MY APPLICATION</value>
+    <value>Assistant Fall Detector</value>
   </data>
   <data name="AppBarButtonText" xml:space="preserve">
     <value>add</value>
   </data>
   <data name="AppBarMenuItemText" xml:space="preserve">
     <value>Menu Item</value>
+  </data>
+  <data name="MainPageAccelerometerTitleText" xml:space="preserve">
+    <value>accelerometer</value>
+  </data>
+  <data name="MainPageAppBarRefreshText" xml:space="preserve">
+    <value>refresh</value>
+  </data>
+  <data name="MainPageContactsTitleText" xml:space="preserve">
+    <value>contacts</value>
+  </data>
+  <data name="MainPageLocationTitleText" xml:space="preserve">
+    <value>location</value>
+  </data>
+  <data name="MainPageSettingsTitleText" xml:space="preserve">
+    <value>settings</value>
+  </data>
+  <data name="MainPageAccelerometerAccelerationMaxText" xml:space="preserve">
+    <value>acceleration maximum reached (G)</value>
+  </data>
+  <data name="MainPageAccelerometerAccelerationText" xml:space="preserve">
+    <value>acceleration (G)</value>
+  </data>
+  <data name="MainPageAccelerometerStatusText" xml:space="preserve">
+    <value>status</value>
+  </data>
+  <data name="MainPageAccelerometerTimeUpdatesText" xml:space="preserve">
+    <value>time between updates (ms)</value>
+  </data>
+  <data name="MainPageAccelerometerXAxisText" xml:space="preserve">
+    <value>X Axis (G)</value>
+  </data>
+  <data name="MainPageAccelerometerYAxisText" xml:space="preserve">
+    <value>Y Axis (G)</value>
+  </data>
+  <data name="MainPageAccelerometerZAxisText" xml:space="preserve">
+    <value>Z Axis (G)</value>
+  </data>
+  <data name="MainPageSettingsAccelerationAlarmText" xml:space="preserve">
+    <value>Acceleration alarm (G)</value>
+  </data>
+  <data name="MainPageSettingsWifiText" xml:space="preserve">
+    <value>WiFi</value>
+  </data>
+  <data name="MainPageSettingsAccelerometerModeText" xml:space="preserve">
+    <value>accelerometer</value>
+  </data>
+  <data name="MainPageLocationGPSBckgTitleText" xml:space="preserve">
+    <value>BACKGROUND GPS</value>
+  </data>
+  <data name="MainPageContactsEmailFilterText" xml:space="preserve">
+    <value>email</value>
+  </data>
+  <data name="MainPageContactsNameFilterText" xml:space="preserve">
+    <value>name</value>
+  </data>
+  <data name="MainPageContactsPhoneFilterText" xml:space="preserve">
+    <value>phone</value>
+  </data>
+  <data name="MainPageContactsResultsLabelText" xml:space="preserve">
+    <value>Search for contacts</value>
+  </data>
+  <data name="MainPageContactsSearchFilterText" xml:space="preserve">
+    <value>search</value>
+  </data>
+  <data name="MainPageContactDetailsTitleText" xml:space="preserve">
+    <value>contact details</value>
+  </data>
+  <data name="MainPagePopupAckButtonText" xml:space="preserve">
+    <value>ack</value>
+  </data>
+  <data name="MainPagePopupDescriptionText" xml:space="preserve">
+    <value>the alarm threshold has been exceeded!</value>
+  </data>
+  <data name="MainPagePopupSendNotificationButtonText" xml:space="preserve">
+    <value>send notification</value>
+  </data>
+  <data name="MainPagePopupTitleText" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="NotificationAlarmText" xml:space="preserve">
+    <value>The alarm threshold has been exceeded</value>
+  </data>
+  <data name="MainPageSettingsPhoneNumberFavoriteContactText" xml:space="preserve">
+    <value>phone number of favorite contact</value>
+  </data>
+  <data name="MainPageContactsLoadingLabelText1" xml:space="preserve">
+    <value>results are loading...</value>
+  </data>
+  <data name="MainPageContactsLoadingLabelText2" xml:space="preserve">
+    <value>results (tap name for details...)</value>
+  </data>
+  <data name="MainPageContactsLoadingLabelText3" xml:space="preserve">
+    <value>no results</value>
+  </data>
+  <data name="ContactDetailsPageDialogCaption" xml:space="preserve">
+    <value>Favorite contact number added</value>
+  </data>
+  <data name="ContactDetailsPageDialogLeftButtonText" xml:space="preserve">
+    <value>continue</value>
+  </data>
+  <data name="ContactDetailsPageDialogMessage1" xml:space="preserve">
+    <value>The number</value>
+  </data>
+  <data name="ContactDetailsPageDialogMessage2" xml:space="preserve">
+    <value>of the selected contact</value>
+  </data>
+  <data name="ContactDetailsPageDialogMessage3" xml:space="preserve">
+    <value>has been added to send alarm notifications.</value>
+  </data>
+  <data name="MainPageSettingsIdleTimeAccelerationAlarmText" xml:space="preserve">
+    <value>Time idle to launch the notification (ms)</value>
+  </data>
+  <data name="MainPageAccelerometerStateAlarmText2" xml:space="preserve">
+    <value>threshold reached</value>
+  </data>
+  <data name="MainPageAccelerometerStateAlarmText3" xml:space="preserve">
+    <value>idle time finished</value>
+  </data>
+  <data name="MainPageAccelerometerStateAlarmText1" xml:space="preserve">
+    <value>normal</value>
+  </data>
+  <data name="MainPageAccelerometerStateAlarmText" xml:space="preserve">
+    <value>recognition phase alarm</value>
   </data>
 </root>
