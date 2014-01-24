@@ -76,9 +76,9 @@
           <source>search</source>
           <target state="translated">búsqueda</target>
         </trans-unit>
-        <trans-unit translate="yes" id="Resx/MainPageContactDetailsTitleText" xml:space="preserve">
+        <trans-unit translate="yes" id="Resx/ContactDetailsPageTitleText" xml:space="preserve">
           <source>contact details</source>
-          <target state="translated">detalles de contacto</target>
+          <target state="translated">contacto</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/MainPagePopupSendNotificationButtonText" xml:space="preserve">
           <source>send notification</source>
@@ -128,6 +128,26 @@
           <source>recognition phase alarm</source>
           <target state="translated">fase de reconocimiento de alarma</target>
         </trans-unit>
+        <trans-unit translate="yes" id="Resx/ContactDetailsPageWebSitesText" xml:space="preserve">
+          <source>web sites</source>
+          <target state="translated">sitios web</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/ContactDetailsPagePhoneNumbersText" xml:space="preserve">
+          <source>phone numbers</source>
+          <target state="translated">números de teléfono</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/ContactDetailsPageEmailsAddressesText" xml:space="preserve">
+          <source>email addresses</source>
+          <target state="translated">direcciones de correo electrónico</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/ContactDetailsCompanyInformationText" xml:space="preserve">
+          <source>company information</source>
+          <target state="translated">información de la compañia</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/ContactDetailsAccountsText" xml:space="preserve">
+          <source>accounts</source>
+          <target state="translated">cuentas</target>
+        </trans-unit>
         <trans-unit translate="yes" id="Resx/ContactDetailsPageDialogMessage2" xml:space="preserve">
           <source>of the selected contact</source>
           <target state="translated">del contacto seleccionado</target>
@@ -137,8 +157,8 @@
           <target state="translated">El número</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/ContactDetailsPageDialogCaption" xml:space="preserve">
-          <source>Favorite contact number added</source>
-          <target state="translated">Número del contacto favorito añadido</target>
+          <source>Favorite number</source>
+          <target state="translated">Número favorito</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/MainPageContactsLoadingLabelText2" xml:space="preserve">
           <source>results (tap name for details...)</source>

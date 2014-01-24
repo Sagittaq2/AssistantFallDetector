@@ -100,9 +100,12 @@
     <Compile Include="Entities\AccelerometerGraphData.cs" />
     <Compile Include="Entities\ApplicationSettingsData.cs" />
     <Compile Include="Entities\AccelerometerMaxData.cs" />
+    <Compile Include="Entities\ContactsData.cs" />
     <Compile Include="Entities\SmsData.cs" />
     <Compile Include="LocalizedStrings.cs" />
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Services\INavigationService.cs" />
+    <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -112,9 +115,11 @@
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\AccelerometerService.cs" />
+    <Compile Include="Services\ApplicationSettingsService.cs" />
     <Compile Include="Services\DispatcherService.cs" />
     <Compile Include="Services\GpsService.cs" />
     <Compile Include="Services\IAccelerometerService.cs" />
+    <Compile Include="Services\IApplicationSettingsService.cs" />
     <Compile Include="Services\IDispatcherService.cs" />
     <Compile Include="Services\IGpsService.cs" />
     <Compile Include="Services\ISmsService.cs" />
@@ -124,8 +129,8 @@
     <Compile Include="ViewModels\Base\VMLocator.cs" />
     <Compile Include="ViewModels\VMContactDetailsPage.cs" />
     <Compile Include="ViewModels\VMMainPage.cs" />
-    <Compile Include="Views\ContactDetails.xaml.cs">
-      <DependentUpon>ContactDetails.xaml</DependentUpon>
+    <Compile Include="Views\ContactDetailsPage.xaml.cs">
+      <DependentUpon>ContactDetailsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -133,11 +138,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
+    <Page Include="Views\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ContactDetails.xaml">
+    <Page Include="Views\ContactDetailsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -204,6 +209,7 @@
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
       <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <XliffResource Include="Resources\AppResources.es.xlf">

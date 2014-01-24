@@ -69,7 +69,7 @@ namespace AssistantFallDetector
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
-            ApplicationSettings = new ApplicationSettingsData();
+            //ApplicationSettings = new ApplicationSettingsData();
 
         }
 

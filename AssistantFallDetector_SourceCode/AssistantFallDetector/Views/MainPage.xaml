@@ -8,22 +8,24 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converters="clr-namespace:AssistantFallDetector.Converters"
-    mc:Ignorable="d"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    mc:Ignorable="d"   
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
-    DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
+    DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
+>
     
     <phone:PhoneApplicationPage.Resources>
         <converters:ContactToPictureConverter x:Key="ContactToPicture"></converters:ContactToPictureConverter>
     </phone:PhoneApplicationPage.Resources>
 
-    <phone:Pivot Title="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}">
+    <phone:Pivot x:Name="MyPivot" Title="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}">
         <phone:PivotItem Header="{Binding LocalizedResources.MainPageAccelerometerTitleText, Source={StaticResource LocalizedStrings}}">
             <StackPanel x:Name="ContentPanel" Margin="12,0,12,0">
-                <Popup x:Name="Popup" IsOpen="{Binding Popup, Mode=TwoWay}" >
+                <Popup x:Name="Popup" IsOpen="{Binding Popup}" >
                     <Border  BorderThickness="2" Margin="10" BorderBrush="Green">
                         <StackPanel Background="LightBlue">
                             <Image Source="/Images/disclaimer.png" HorizontalAlignment="Center" Stretch="Fill" Margin="0,15,0,5"/>
@@ -75,7 +77,6 @@
                     <Line X1="{Binding AGraphData.YLineX1}" Y1="{Binding AGraphData.YLineY1}" X2="{Binding AGraphData.YLineX2}" Y2="{Binding AGraphData.YLineY2}" Stroke="Green" StrokeThickness="4"></Line>
                     <Line X1="{Binding AGraphData.ZLineX1}" Y1="{Binding AGraphData.ZLineY1}" X2="{Binding AGraphData.ZLineX2}" Y2="{Binding AGraphData.ZLineY2}" Stroke="Blue" StrokeThickness="4"></Line>
                 </Grid>
-
             </StackPanel>           
         </phone:PivotItem>
         
@@ -102,35 +103,26 @@
         </phone:PivotItem>
 
         <phone:PivotItem Header="{Binding LocalizedResources.MainPageContactsTitleText, Source={StaticResource LocalizedStrings}}">
-            <StackPanel Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
+             <StackPanel Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                <TextBox x:Name="contactFilterString" />
+                <Button Content="{Binding LocalizedResources.MainPageContactsSearchFilterText, Source={StaticResource LocalizedStrings}}" 
+                        Command="{Binding SearchContactsCommand}" CommandParameter="{Binding ElementName=contactFilterString,Path=Text}" />
 
-                    <TextBox Name="contactFilterString" Grid.Row="0" Grid.ColumnSpan="2" />
-                    <RadioButton x:Name="contactFilterName" Content="{Binding LocalizedResources.MainPageContactsNameFilterText, Source={StaticResource LocalizedStrings}}" Grid.Row="1" Grid.Column="0" Checked="FilterChange" />
-                    <RadioButton x:Name="contactFilterPhone" Content="{Binding LocalizedResources.MainPageContactsPhoneFilterText, Source={StaticResource LocalizedStrings}}" Grid.Row="1" Grid.Column="1" Checked="FilterChange" />
-                    <RadioButton x:Name="contactFilterEmail" Content="{Binding LocalizedResources.MainPageContactsEmailFilterText, Source={StaticResource LocalizedStrings}}" Grid.Row="2" Grid.Column="0" Checked="FilterChange" />
-                    <Button Grid.Row="2" Grid.Column="1" Content="{Binding LocalizedResources.MainPageContactsSearchFilterText, Source={StaticResource LocalizedStrings}}" Click="SearchContacts_Click" />
-                </Grid>
-
-                <TextBlock x:Name="contactResultsLabel" Text="{Binding LocalizedResources.MainPageContactsResultsLabelText, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Margin="12,0,0,0" />
-
-                <ListBox x:Name="contactResultsData" ItemsSource="{Binding}" Tap="ContactResultsData_Tap" Height="300" Margin="24,0,0,0" >
+                <TextBlock x:Name="contactResultsLabel" Text="{Binding StateContactsSearch}" TextWrapping="Wrap" Margin="12,0,0,0" />
+                <ListBox x:Name="contactResultsData" ItemsSource="{Binding ContactsData}"  Height="400" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Tap">
+                            <i:InvokeCommandAction Command="{Binding NavigateToContactDetailsPageCommand}" 
+                                                   CommandParameter="{Binding SelectedItem, ElementName=contactResultsData}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" >
                                 <Border BorderThickness="2" HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="{StaticResource PhoneAccentBrush}" >
                                     <Image Source="{Binding Converter={StaticResource ContactToPicture}}" Width="48" Height="48" Stretch="Fill"  />
                                 </Border>
-                                <TextBlock Name="contactResults" Text="{Binding Path=DisplayName, Mode=OneWay}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" Margin="18,8,0,0" />
+                                <TextBlock x:Name="contactResults" Text="{Binding Path=DisplayName, Mode=OneWay}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" Margin="18,8,0,0" />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -140,20 +132,22 @@
 
         <phone:PivotItem Header="{Binding LocalizedResources.MainPageSettingsTitleText, Source={StaticResource LocalizedStrings}}">
             <!--Settings resources-->               
-            <StackPanel x:Name="SettingsPanel">              
+            <StackPanel Orientation="Vertical">
+ 
                 <TextBlock Text="{Binding LocalizedResources.MainPageSettingsAccelerationAlarmText, Source={StaticResource LocalizedStrings}}" />                
                 <Slider x:Name="AccelerationAlarmSlider" Minimum="1" Maximum="3" SmallChange="0.1" LargeChange="0.5" 
                         Value="{Binding AccelerationAlarmSetting, Mode=TwoWay}" />
-                <TextBlock Text="{Binding ElementName=AccelerationAlarmSlider,Path=Value}" HorizontalAlignment="Center" />
+                <TextBlock Text="{Binding ElementName=AccelerationAlarmSlider, Path=Value}" HorizontalAlignment="Center" Margin="0,0,0,20" />
 
                 <TextBlock Text="{Binding LocalizedResources.MainPageSettingsIdleTimeAccelerationAlarmText, Source={StaticResource LocalizedStrings}}" />
                 <Slider x:Name="IdleTimeAccelerationAlarmSlider" Minimum="0" Maximum="10000" SmallChange="500" LargeChange="1000" 
                         Value="{Binding IdleTimeAccelerationAlarmSetting, Mode=TwoWay}" />
-                <TextBlock Text="{Binding ElementName=IdleTimeAccelerationAlarmSlider,Path=Value}" HorizontalAlignment="Center" />                
+                <TextBlock Text="{Binding ElementName=IdleTimeAccelerationAlarmSlider,Path=Value}" HorizontalAlignment="Center" Margin="0,0,0,20" />
+
+                <TextBlock Text="{Binding LocalizedResources.MainPageSettingsPhoneNumberFavoriteContactText, Source={StaticResource LocalizedStrings}}" />
+                <TextBox Text="{Binding PhoneNumberFavoriteContactSetting, Mode=OneWay}" Margin="0,0,0,20" IsReadOnly="True" />
                 <!--<toolkit:ToggleSwitch Header="{Binding LocalizedResources.MainPageSettingsAccelerometerModeText, Source={StaticResource LocalizedStrings}}" 
                                       IsChecked="{Binding AccelerometerMode, Mode=TwoWay}" />-->
-                <TextBlock Text="{Binding LocalizedResources.MainPageSettingsPhoneNumberFavoriteContactText, Source={StaticResource LocalizedStrings}}" />
-                <TextBox Text="{Binding PhoneNumberFavoriteContactSetting, Mode=TwoWay}" />
             </StackPanel>
         </phone:PivotItem>
 

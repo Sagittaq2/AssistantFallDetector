@@ -197,7 +197,7 @@
   <data name="MainPageContactsSearchFilterText" xml:space="preserve">
     <value>search</value>
   </data>
-  <data name="MainPageContactDetailsTitleText" xml:space="preserve">
+  <data name="ContactDetailsPageTitleText" xml:space="preserve">
     <value>contact details</value>
   </data>
   <data name="MainPagePopupAckButtonText" xml:space="preserve">
@@ -228,7 +228,7 @@
     <value>no results</value>
   </data>
   <data name="ContactDetailsPageDialogCaption" xml:space="preserve">
-    <value>Favorite contact number added</value>
+    <value>Favorite number</value>
   </data>
   <data name="ContactDetailsPageDialogLeftButtonText" xml:space="preserve">
     <value>continue</value>
@@ -256,5 +256,20 @@
   </data>
   <data name="MainPageAccelerometerStateAlarmText" xml:space="preserve">
     <value>recognition phase alarm</value>
+  </data>
+  <data name="ContactDetailsAccountsText" xml:space="preserve">
+    <value>accounts</value>
+  </data>
+  <data name="ContactDetailsCompanyInformationText" xml:space="preserve">
+    <value>company information</value>
+  </data>
+  <data name="ContactDetailsPageEmailsAddressesText" xml:space="preserve">
+    <value>email addresses</value>
+  </data>
+  <data name="ContactDetailsPagePhoneNumbersText" xml:space="preserve">
+    <value>phone numbers</value>
+  </data>
+  <data name="ContactDetailsPageWebSitesText" xml:space="preserve">
+    <value>web sites</value>
   </data>
 </root>

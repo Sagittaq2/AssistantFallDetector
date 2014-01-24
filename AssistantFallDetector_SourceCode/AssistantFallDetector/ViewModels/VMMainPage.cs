@@ -13,11 +13,18 @@ using System.ServiceModel;
 using Windows.UI.Core;
 using System.Collections.ObjectModel;
 using Microsoft.Devices;
+using System.IO.IsolatedStorage;
+using Microsoft.Phone.UserData;
 
 namespace AssistantFallDetector.ViewModels
 {
     public class VMMainPage : VMBase
     {
+        private INavigationService navService;
+
+        private IApplicationSettingsService applicationSettingsService;
+        private ApplicationSettingsData applicationSettingsData;
+
         private IAccelerometerService accelerometerService;
         private IDispatcherService dispatcherService;
         private AccelerometerData accelerometerData;
@@ -29,6 +36,9 @@ namespace AssistantFallDetector.ViewModels
 
         private ISmsService smsService;
         private SmsData smsData;
+
+        private ObservableCollection<Contact> contactsData = new ObservableCollection<Contact>();
+        private string stateContactsSearch = Resources.AppResources.MainPageContactsResultsLabelText;
 
         private VibrateController iVibrateController;
 
@@ -48,14 +58,17 @@ namespace AssistantFallDetector.ViewModels
 
         private bool popup;
 
-        private string phoneNumberFavoriteContactSetting2;
-        private string phoneNumberFavorite = "69696969696";
-
         private DelegateCommand ackAlarmCommand;
         private DelegateCommand sendNotificationAlarmCommand;
+        private Lazy<DelegateCommand<string>> searchContactsCommand;
+        private Lazy<DelegateCommand<object>> navigateToContactDetailsPageCommand;
 
-        public VMMainPage(IAccelerometerService accelerometerService, IGpsService gpsService, ISmsService smsService, IDispatcherService dispatcherService)
+        private ContactPhoneNumber telefono;
+
+        public VMMainPage(INavigationService navService, IApplicationSettingsService applicationSettingsService, IAccelerometerService accelerometerService, IGpsService gpsService, ISmsService smsService, IDispatcherService dispatcherService)
         {
+            this.navService = navService;
+            this.applicationSettingsService = applicationSettingsService;
             this.accelerometerService = accelerometerService;
             this.gpsService = gpsService;
             this.smsService = smsService;
@@ -63,17 +76,33 @@ namespace AssistantFallDetector.ViewModels
 
             this.accelerometerService.AccelerometerReadingChanged += accelerometerService_AccelerometerReadingChanged;
             this.gpsService.GpsPositionChanged += gpsService_GpsPositionChanged;
-
+           
             Popup = false;
-            //PhoneNumberFavoriteContactSetting2 = ApplicationSettingsData.PhoneNumberFavoriteContactSetting;
-            //phoneNumberFavoriteContactSetting2 = ApplicationSettingsData.PhoneNumberFavoriteContactSetting
+
             ackAlarmCommand = new DelegateCommand(AckAlarmCommandExecute, AckAlarmCommandCanExecute);
             sendNotificationAlarmCommand = new DelegateCommand(SendNotificationAlarmCommandExecute, SendNotificationAlarmCommandCanExecute);
-            
+            searchContactsCommand = new Lazy<DelegateCommand<string>>(
+                () =>
+                    new DelegateCommand<string>(SearchContactsCommandExecute, SearchContactsCommandCanExecute)
+            );
+
+            navigateToContactDetailsPageCommand = new Lazy<DelegateCommand<object>>(
+                () =>
+                    new DelegateCommand<object>(NavigateToContactDetailsPageCommandExecute, NavigateToContactDetailsPageCommandCanExecute)
+            );
+
             iVibrateController = VibrateController.Default;
             
             try
             {
+                this.applicationSettingsService.LoadApplicationSettings();
+                this.applicationSettingsData = new ApplicationSettingsData();
+                this.applicationSettingsData.AccelerationAlarmSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.AccelerationAlarmSettingKeyName, this.applicationSettingsData.AccelerationAlarmSettingDefault);
+                this.applicationSettingsData.IdleTimeAccelerationAlarmSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.IdleTimeAccelerationAlarmSettingKeyName, this.applicationSettingsData.IdleTimeAccelerationAlarmSettingDefault);
+                this.applicationSettingsData.InitialLaunchSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.InitialLaunchSettingKeyName, this.applicationSettingsData.InitialLaunchSettingDefault);
+                this.applicationSettingsData.LastUpdatedTimeSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.LastUpdatedTimeSettingKeyName, this.applicationSettingsData.LastUpdatedTimeSettingDefault);
+                this.applicationSettingsData.PhoneNumberFavoriteContactSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.PhoneNumberFavoriteContactSettingKeyName, this.applicationSettingsData.PhoneNumberFavoriteContactSettingDefault);
+
                 this.accelerometerService.InitializeAccelerometer();
 
                 this.accelerometerMaxData = new AccelerometerMaxData();
@@ -135,7 +164,7 @@ namespace AssistantFallDetector.ViewModels
                 accelerometerGraphData.ZLineY2 = accelerometerGraphData.ZLineY1 + accelerometerData.ZAxis * 50;
                 AGraphData = accelerometerGraphData;
 
-                if ((AData.Acceleration > ApplicationSettingsData.AccelerationAlarmSetting) && (!StartedAlarmAck))
+                if ((AData.Acceleration > applicationSettingsData.AccelerationAlarmSetting) && (!StartedAlarmAck))
                 {
                     //ToDo: Tiempo que debe permanecer en reposo antes de dar la alarma.
                     StartedTimeStamp = DateTime.Now;
@@ -149,7 +178,7 @@ namespace AssistantFallDetector.ViewModels
                         if ((LA < AData.Acceleration) && (AData.Acceleration < HA))
                         {
                             IdleTime = (DateTime.Now - StartedTimeStamp);
-                            if (IdleTime.TotalMilliseconds > ApplicationSettingsData.IdleTimeAccelerationAlarmSetting)
+                            if (IdleTime.TotalMilliseconds > applicationSettingsData.IdleTimeAccelerationAlarmSetting)
                             {
                                 StateAlarm = Resources.AppResources.MainPageAccelerometerStateAlarmText3;
                                 Popup = true;
@@ -222,25 +251,36 @@ namespace AssistantFallDetector.ViewModels
             }
         }
 
-        public string PhoneNumberFavoriteContactSetting2
+        public double AccelerationAlarmSetting
         {
-            get { return ApplicationSettingsData.PhoneNumberFavoriteContactSetting; }
+            get { return applicationSettingsData.AccelerationAlarmSetting; }
             set
             {
-                //ApplicationSettingsData.PhoneNumberFavoriteContactSetting = value;
-                this.phoneNumberFavoriteContactSetting2 = value;
+                applicationSettingsData.AccelerationAlarmSetting = value;
                 RaisePropertyChanged();
+                applicationSettingsService.AddOrUpdateValue(applicationSettingsData.AccelerationAlarmSettingKeyName, value);
             }
         }
 
-        public string PhoneNumberFavorite
+        public uint IdleTimeAccelerationAlarmSetting
         {
-            get { return this.phoneNumberFavorite; }
+            get { return applicationSettingsData.IdleTimeAccelerationAlarmSetting; }
             set
             {
-                //ApplicationSettingsData.PhoneNumberFavoriteContactSetting = value;
-                this.phoneNumberFavorite = value;
+                applicationSettingsData.IdleTimeAccelerationAlarmSetting = value;
                 RaisePropertyChanged();
+                applicationSettingsService.AddOrUpdateValue(applicationSettingsData.IdleTimeAccelerationAlarmSettingKeyName, value);
+            }
+        }
+
+        public string PhoneNumberFavoriteContactSetting
+        {
+            get { return applicationSettingsData.PhoneNumberFavoriteContactSetting; }
+            set
+            {
+                applicationSettingsData.PhoneNumberFavoriteContactSetting = value;
+                RaisePropertyChanged();
+                applicationSettingsService.AddOrUpdateValue(applicationSettingsData.PhoneNumberFavoriteContactSettingKeyName, value);
             }
         }
 
@@ -271,7 +311,7 @@ namespace AssistantFallDetector.ViewModels
             StateAlarm = Resources.AppResources.MainPageAccelerometerStateAlarmText1;
 
             smsData = new SmsData();
-            smsData.Number = ApplicationSettingsData.PhoneNumberFavoriteContactSetting;
+            smsData.Number = applicationSettingsData.PhoneNumberFavoriteContactSetting;
             smsData.Text = Resources.AppResources.NotificationAlarmText;
             var result = this.smsService.SendSMS(smsData);
 
@@ -319,6 +359,98 @@ namespace AssistantFallDetector.ViewModels
 
                     Coordinates.Add(coordinates);
                 });
+            }
+        }
+
+        public ICommand SearchContactsCommand
+        {
+            get { return searchContactsCommand.Value; }
+        }
+
+        public void SearchContactsCommandExecute(string param)
+        {
+            StateContactsSearch = Resources.AppResources.MainPageContactsLoadingLabelText1;
+
+            FilterKind contactFilterKind = FilterKind.None;
+            
+            contactFilterKind = FilterKind.DisplayName;
+            
+            Contacts cons = new Contacts();
+
+            cons.SearchCompleted += new EventHandler<ContactsSearchEventArgs>(Contacts_SearchCompleted);
+
+            cons.SearchAsync(param, contactFilterKind, "Contacts Test #1");
+        }
+
+        void Contacts_SearchCompleted(object sender, ContactsSearchEventArgs e)
+        {
+            if (e.Results.Count<Contact>() > 0)
+            {
+                ContactsData = new ObservableCollection<Contact>(e.Results);
+
+                StateContactsSearch = Resources.AppResources.MainPageContactsLoadingLabelText2;
+            }
+            else
+            {
+                StateContactsSearch = Resources.AppResources.MainPageContactsLoadingLabelText3;
+            }
+
+        }
+
+        public bool SearchContactsCommandCanExecute(string param)
+        {
+            return true;
+        }
+
+        public ObservableCollection<Contact> ContactsData
+        {
+            get
+            {
+                return this.contactsData;
+            }
+            set
+            {
+                contactsData = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string StateContactsSearch
+        {
+            get { return this.stateContactsSearch; }
+            set
+            {
+                this.stateContactsSearch = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public ICommand NavigateToContactDetailsPageCommand
+        {
+            get { return navigateToContactDetailsPageCommand.Value; }
+        }
+
+        public void NavigateToContactDetailsPageCommandExecute(object contacto)
+        {
+            this.navService.NavigateToContactDetailsPage(contacto);
+        }
+
+        public bool NavigateToContactDetailsPageCommandCanExecute(object contacto)
+        {
+            return true;
+        }
+
+        public ContactPhoneNumber Telefono
+        {
+            get
+            {
+                return telefono;
+            }
+            set
+            {
+                telefono = value;
+                PhoneNumberFavoriteContactSetting = telefono.PhoneNumber;
+                //RaisePropertyChanged();
             }
         }
 

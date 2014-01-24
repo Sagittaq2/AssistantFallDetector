@@ -13,203 +13,122 @@ namespace AssistantFallDetector.Entities
 {
     public class ApplicationSettingsData
     {
-        // Isolated storage settings
-        private static IsolatedStorageSettings _isolatedStore;
-
         // Isolated storage key names
-        private const string InitialLaunchSettingKeyName = "InitialLaunchSetting";
-        private const string LastUpdatedTimeKeyName = "LastUpdatedTime";
-
-        private const string AccelerationAlarmSettingKeyName = "AccelerationAlarmSetting";
-        private const string IdleTimeAccelerationAlarmSettingKeyName = "IdleTimeAccelerationAlarmSetting";
-        private const string PhoneNumberFavoriteContactSettingKeyName = "PhoneNumberFavoriteContactSetting";      
+        private string initialLaunchSettingKeyName = "InitialLaunchSetting";
+        private string lastUpdatedTimeSettingKeyName = "LastUpdatedTime";
+        private string accelerationAlarmSettingKeyName = "AccelerationAlarmSetting";
+        private string idleTimeAccelerationAlarmSettingKeyName = "IdleTimeAccelerationAlarmSetting";
+        private string phoneNumberFavoriteContactSettingKeyName = "PhoneNumberFavoriteContactSetting";      
 
         // Default values of our settings
-        private const bool InitialLaunchSettingDefault = true;
-        private const string LastUpdatedDefault = null;
+        private bool initialLaunchSettingDefault = true;
+        private string lastUpdatedTimeSettingDefault = null;
+        private double accelerationAlarmSettingDefault = 1.5;
+        private uint idleTimeAccelerationAlarmSettingDefault = 3000;
+        private string phoneNumberFavoriteContactSettingDefault = null;
 
-        private const double AccelerationAlarmSettingDefault = 1.5;
-        private const uint IdleTimeAccelerationAlarmSettingDefault = 3000;
-        private const string PhoneNumberFavoriteContactSettingDefault = null;
+        // Isolated storage key names
+        private bool initialLaunchSetting;
+        private string lastUpdatedTimeSetting;
+        private double accelerationAlarmSetting;
+        private uint idleTimeAccelerationAlarmSetting;
+        private string phoneNumberFavoriteContactSetting;  
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        /// <summary>
-        /// Constructor that gets the application settings.
-        /// </summary>
         public ApplicationSettingsData()
         {
-            try
-            {
-                // Get previous application settings.
-                _isolatedStore = IsolatedStorageSettings.ApplicationSettings;
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Exception while using IsolatedStorageSettings: " + e.ToString());
-            }
         }
 
-        /// <summary>
-        /// Update a setting value for our application. If the setting does not
-        /// exist, then add the setting.
-        /// </summary>
-        /// <param name="Key"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        private static bool AddOrUpdateValue(string Key, Object value)
-        {
-            bool valueChanged = false;
-
-            // If the key exists
-            if (_isolatedStore.Contains(Key))
-            {
-                // If the value has changed
-                if (_isolatedStore[Key] != value)
-                {
-                    // Store the new value
-                    _isolatedStore[Key] = value;
-                    valueChanged = true;
-                }
-            }
-            // Otherwise create the key.
-            else
-            {
-                _isolatedStore.Add(Key, value);
-                valueChanged = true;
-            }
-
-            return valueChanged;
+        public string InitialLaunchSettingKeyName
+        { 
+            get { return initialLaunchSettingKeyName; }
+            set { initialLaunchSettingKeyName=value; }
         }
 
-        /// <summary>
-        /// Get the current value of the setting, or if it is not found, set the 
-        /// setting to the default setting.
-        /// </summary>
-        /// <typeparam name="valueType"></typeparam>
-        /// <param name="Key"></param>
-        /// <param name="defaultValue"></param>
-        /// <returns></returns>
-        private static valueType GetValueOrDefault<valueType>(string Key, valueType defaultValue)
+        public string LastUpdatedTimeSettingKeyName
         {
-            valueType value;
-
-            // If the key exists, retrieve the value.
-            if (_isolatedStore.Contains(Key))
-            {
-                value = (valueType)_isolatedStore[Key];
-            }
-            // Otherwise, use the default value.
-            else
-            {
-                value = defaultValue;
-            }
-
-            return value;
+            get { return lastUpdatedTimeSettingKeyName; }
+            set { lastUpdatedTimeSettingKeyName = value; }
         }
 
-        /// <summary>
-        /// Save the settings.
-        /// </summary>
-        private static void Save()
+        public string AccelerationAlarmSettingKeyName
         {
-            _isolatedStore.Save();
+            get { return accelerationAlarmSettingKeyName; }
+            set { accelerationAlarmSettingKeyName = value; }
+        }
+
+        public string IdleTimeAccelerationAlarmSettingKeyName
+        {
+            get { return idleTimeAccelerationAlarmSettingKeyName; }
+            set { idleTimeAccelerationAlarmSettingKeyName = value; }
+        }
+
+        public string PhoneNumberFavoriteContactSettingKeyName
+        {
+            get { return phoneNumberFavoriteContactSettingKeyName; }
+            set { phoneNumberFavoriteContactSettingKeyName = value; }
         }
 
 
-        /// <summary>
-        /// Setting that determines whether application 
-        /// </summary>
-        public static bool InitialLaunchSetting
+        public bool InitialLaunchSettingDefault
         {
-            get
-            {
-                return GetValueOrDefault<bool>(InitialLaunchSettingKeyName, InitialLaunchSettingDefault);
-            }
-            set
-            {
-                AddOrUpdateValue(InitialLaunchSettingKeyName, value);
-                Save();
-            }
+            get { return initialLaunchSettingDefault; }
+            set { initialLaunchSettingDefault = value; }
         }
 
-        /// <summary>
-        /// Setting storing the Last Updated Time
-        /// </summary>
-        public static string LastUpdatedTime
+        public string LastUpdatedTimeSettingDefault
         {
-            get
-            {
-                return GetValueOrDefault<string>(LastUpdatedTimeKeyName, LastUpdatedDefault);
-            }
-            set
-            {
-                AddOrUpdateValue(LastUpdatedTimeKeyName, value);
-                Save();
-            }
+            get { return lastUpdatedTimeSettingDefault; }
+            set { lastUpdatedTimeSettingDefault = value; }
         }
 
-        /// <summary>
-        /// Setting storing the Acceleration Alarm Setting
-        /// </summary>
-        public static double AccelerationAlarmSetting
+        public double AccelerationAlarmSettingDefault
         {
-            get
-            {
-                return GetValueOrDefault<double>(AccelerationAlarmSettingKeyName, AccelerationAlarmSettingDefault);
-            }
-            set
-            {
-                AddOrUpdateValue(AccelerationAlarmSettingKeyName, value);
-                Save();
-            }
+            get { return accelerationAlarmSettingDefault; }
+            set { accelerationAlarmSettingDefault = value; }
         }
 
-        /// <summary>
-        /// Setting storing the Idle Time of Acceleration Setting
-        /// </summary>
-        public static uint IdleTimeAccelerationAlarmSetting
+        public uint IdleTimeAccelerationAlarmSettingDefault
         {
-            get
-            {
-                return GetValueOrDefault<uint>(IdleTimeAccelerationAlarmSettingKeyName, IdleTimeAccelerationAlarmSettingDefault);
-            }
-            set
-            {
-                AddOrUpdateValue(IdleTimeAccelerationAlarmSettingKeyName, value);
-                Save();
-            }
+            get { return idleTimeAccelerationAlarmSettingDefault; }
+            set { idleTimeAccelerationAlarmSettingDefault = value; }
         }
 
-        /// <summary>
-        /// Setting storing the Phone Number of Favorite Contact Setting
-        /// </summary>
-        public static string PhoneNumberFavoriteContactSetting
+        public string PhoneNumberFavoriteContactSettingDefault
         {
-            get
-            {
-                return GetValueOrDefault<string>(PhoneNumberFavoriteContactSettingKeyName, PhoneNumberFavoriteContactSettingDefault);
-            }
-            set
-            {
-                AddOrUpdateValue(PhoneNumberFavoriteContactSettingKeyName, value);
-                Save();
-                VMLocator prueba = new VMLocator();
-                prueba.MainViewModel.PhoneNumberFavoriteContactSetting2 = value;               
-            }
+            get { return phoneNumberFavoriteContactSettingDefault; }
+            set { phoneNumberFavoriteContactSettingDefault = value; }
         }
 
-        private void NotifyPropertyChanged(String propertyName)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (null != handler)
-            {
-                Deployment.Current.Dispatcher.BeginInvoke(() =>
-                {
-                    handler(this, new PropertyChangedEventArgs(propertyName));
-                });
 
-            }
+        public bool InitialLaunchSetting
+        {
+            get { return initialLaunchSetting; }
+            set { initialLaunchSetting = value; }
+        }
+
+        public string LastUpdatedTimeSetting
+        {
+            get { return lastUpdatedTimeSetting; }
+            set { lastUpdatedTimeSetting = value; }
+        }
+
+        public double AccelerationAlarmSetting
+        {
+            get { return accelerationAlarmSetting; }
+            set { accelerationAlarmSetting = value; }
+        }
+
+        public uint IdleTimeAccelerationAlarmSetting
+        {
+            get { return idleTimeAccelerationAlarmSetting; }
+            set { idleTimeAccelerationAlarmSetting = value; }
+        }
+
+        public string PhoneNumberFavoriteContactSetting
+        {
+            get { return phoneNumberFavoriteContactSetting; }
+            set { phoneNumberFavoriteContactSetting = value; }
         }
     }
 }

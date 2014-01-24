@@ -88,7 +88,25 @@ namespace AssistantFallDetector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Favorite contact number added.
+        ///   Looks up a localized string similar to accounts.
+        /// </summary>
+        public static string ContactDetailsAccountsText {
+            get {
+                return ResourceManager.GetString("ContactDetailsAccountsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to company information.
+        /// </summary>
+        public static string ContactDetailsCompanyInformationText {
+            get {
+                return ResourceManager.GetString("ContactDetailsCompanyInformationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Favorite number.
         /// </summary>
         public static string ContactDetailsPageDialogCaption {
             get {
@@ -129,6 +147,42 @@ namespace AssistantFallDetector.Resources {
         public static string ContactDetailsPageDialogMessage3 {
             get {
                 return ResourceManager.GetString("ContactDetailsPageDialogMessage3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to email addresses.
+        /// </summary>
+        public static string ContactDetailsPageEmailsAddressesText {
+            get {
+                return ResourceManager.GetString("ContactDetailsPageEmailsAddressesText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to phone numbers.
+        /// </summary>
+        public static string ContactDetailsPagePhoneNumbersText {
+            get {
+                return ResourceManager.GetString("ContactDetailsPagePhoneNumbersText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to contact details.
+        /// </summary>
+        public static string ContactDetailsPageTitleText {
+            get {
+                return ResourceManager.GetString("ContactDetailsPageTitleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to web sites.
+        /// </summary>
+        public static string ContactDetailsPageWebSitesText {
+            get {
+                return ResourceManager.GetString("ContactDetailsPageWebSitesText", resourceCulture);
             }
         }
         
@@ -246,15 +300,6 @@ namespace AssistantFallDetector.Resources {
         public static string MainPageAppBarRefreshText {
             get {
                 return ResourceManager.GetString("MainPageAppBarRefreshText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to contact details.
-        /// </summary>
-        public static string MainPageContactDetailsTitleText {
-            get {
-                return ResourceManager.GetString("MainPageContactDetailsTitleText", resourceCulture);
             }
         }
         

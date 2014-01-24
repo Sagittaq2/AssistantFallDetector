@@ -12,18 +12,18 @@ namespace AssistantFallDetector.ViewModels.Base
         private Action execute;
         private Func<bool> canExecute;
 
-        public DelegateCommand(Action exec, Func<bool> canExec)
+        public DelegateCommand(Action execute, Func<bool> canExecute)
         {
-            this.execute = exec;
-            this.canExecute = canExec;
+            this.execute = execute;
+            this.canExecute = canExecute;
         }
 
         public bool CanExecute(object parameter)
         {
-            if (canExecute == null)
-                return true;
+            if (this.canExecute != null)
+                return this.canExecute();
 
-            return canExecute();
+            return true;
         }
 
 
@@ -31,8 +31,7 @@ namespace AssistantFallDetector.ViewModels.Base
 
         public void Execute(object parameter)
         {
-            if (execute != null)
-                execute();
+            this.execute();
         }
 
         public void RaiseCanExecuteChanged()
