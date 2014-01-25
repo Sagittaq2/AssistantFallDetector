@@ -11,6 +11,7 @@ using Microsoft.Phone.UserData;
 using Microsoft.Phone.Shell;
 using AssistantFallDetector.Resources;
 using AssistantFallDetector.Entities;
+using AssistantFallDetector.ViewModels;
 
 namespace AssistantFallDetector
 {
@@ -54,9 +55,15 @@ namespace AssistantFallDetector
 
                 appBar.MenuItems.Add(refreshMenu);
 
-                this.ApplicationBar = appBar;
+                //this.ApplicationBar = appBar;
             }
 
+        }
+
+        private void ApplicationBarIconAboutButton_Click(object sender, EventArgs e)
+        {
+            var viewModel = (VMMainPage)this.DataContext;
+            viewModel.AboutCommand.Execute(null);
         }
 
         // Sample code for building a localized ApplicationBar

@@ -88,6 +88,24 @@ namespace AssistantFallDetector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assembly version.
+        /// </summary>
+        public static string AssemblyVersion {
+            get {
+                return ResourceManager.GetString("AssemblyVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to David Eiroa Menasalvas.
+        /// </summary>
+        public static string Author {
+            get {
+                return ResourceManager.GetString("Author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to accounts.
         /// </summary>
         public static string ContactDetailsAccountsText {
@@ -394,6 +412,15 @@ namespace AssistantFallDetector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to show location.
+        /// </summary>
+        public static string MainPageLocationMapButtonText {
+            get {
+                return ResourceManager.GetString("MainPageLocationMapButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to location.
         /// </summary>
         public static string MainPageLocationTitleText {
@@ -466,6 +493,15 @@ namespace AssistantFallDetector.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Portrait.
+        /// </summary>
+        public static string MainPageSettingsOrientationPortraitText {
+            get {
+                return ResourceManager.GetString("MainPageSettingsOrientationPortraitText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to phone number of favorite contact.
         /// </summary>
         public static string MainPageSettingsPhoneNumberFavoriteContactText {
@@ -511,7 +547,7 @@ namespace AssistantFallDetector.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to en-US.
+        ///   Looks up a localized string similar to en.
         /// </summary>
         public static string ResourceLanguage {
             get {

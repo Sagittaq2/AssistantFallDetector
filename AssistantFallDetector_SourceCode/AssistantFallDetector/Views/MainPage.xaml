@@ -58,17 +58,17 @@
                         <TextBlock x:Name="zAxis" Text="{Binding AData.ZAxis}" FontSize="24"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding LocalizedResources.MainPageAccelerometerAccelerationText, Source={StaticResource LocalizedStrings}}" Foreground="White" FontWeight="Bold" Padding="0,0,20,0" />
+                        <TextBlock Text="{Binding LocalizedResources.MainPageAccelerometerAccelerationText, Source={StaticResource LocalizedStrings}}" FontWeight="Bold" Padding="0,0,20,0" />
                         <TextBlock x:Name="acceleration" Text="{Binding AData.Acceleration}" FontSize="24"/>
                     </StackPanel>
                     
-                    <TextBlock Text="{Binding LocalizedResources.MainPageAccelerometerAccelerationMaxText, Source={StaticResource LocalizedStrings}}" Foreground="White" FontWeight="Bold" />
+                    <TextBlock Text="{Binding LocalizedResources.MainPageAccelerometerAccelerationMaxText, Source={StaticResource LocalizedStrings}}" FontWeight="Bold" />
                     <TextBlock x:Name="xAxisMax" Text="{Binding AMaxData.XAxisMax}" FontSize="24" Foreground="Red" />
                     <TextBlock x:Name="yAxisMax" Text="{Binding AMaxData.YAxisMax}" FontSize="24" Foreground="Green" />
                     <TextBlock x:Name="zAxisMax" Text="{Binding AMaxData.ZAxisMax}" FontSize="24" Foreground="Blue"/>
                     <TextBlock x:Name="accelerationMax" Text="{Binding AMaxData.AccelerationMax}" FontSize="24"/>
 
-                    <TextBlock Text="{Binding LocalizedResources.MainPageAccelerometerStateAlarmText, Source={StaticResource LocalizedStrings}}" Foreground="White" FontWeight="Bold" />
+                    <TextBlock Text="{Binding LocalizedResources.MainPageAccelerometerStateAlarmText, Source={StaticResource LocalizedStrings}}" FontWeight="Bold" />
                     <TextBlock x:Name="stateAlarm" Text="{Binding StateAlarm}" FontSize="24"/>
                 </StackPanel>
                 
@@ -89,6 +89,8 @@
 
                 <!--TitlePanel contains the name of the application and page title-->
                 <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+                    <Button Content="{Binding LocalizedResources.MainPageLocationMapButtonText, Source={StaticResource LocalizedStrings}}" 
+                        Command="{Binding ShowLocationMapCommand}" />
                     <TextBlock Text="{Binding LocalizedResources.MainPageLocationGPSBckgTitleText, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" Margin="0"
                        FontSize="22"/>
                 </StackPanel>
@@ -146,11 +148,26 @@
 
                 <TextBlock Text="{Binding LocalizedResources.MainPageSettingsPhoneNumberFavoriteContactText, Source={StaticResource LocalizedStrings}}" />
                 <TextBox Text="{Binding PhoneNumberFavoriteContactSetting, Mode=OneWay}" Margin="0,0,0,20" IsReadOnly="True" />
-                <!--<toolkit:ToggleSwitch Header="{Binding LocalizedResources.MainPageSettingsAccelerometerModeText, Source={StaticResource LocalizedStrings}}" 
-                                      IsChecked="{Binding AccelerometerMode, Mode=TwoWay}" />-->
+                
+                <toolkit:ToggleSwitch Header="{Binding LocalizedResources.MainPageSettingsOrientationPortraitText, Source={StaticResource LocalizedStrings}}" 
+                                      IsChecked="{Binding OrientationPortraitSetting, Mode=TwoWay}" />
             </StackPanel>
         </phone:PivotItem>
 
     </phone:Pivot>
-    
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar Mode="Minimized">
+            <shell:ApplicationBarIconButton IconUri="/Assets/ApplicationBarIconAbout.png"
+                                            Click="ApplicationBarIconAboutButton_Click"
+                                            Text="about">
+            </shell:ApplicationBarIconButton>
+            <!--<shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="menu item 1"
+                                              Click="ApplicationBarMenuItem_Click">
+                </shell:ApplicationBarMenuItem>
+            </shell:ApplicationBar.MenuItems>-->
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
 </phone:PhoneApplicationPage>

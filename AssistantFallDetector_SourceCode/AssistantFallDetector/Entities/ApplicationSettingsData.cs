@@ -18,7 +18,8 @@ namespace AssistantFallDetector.Entities
         private string lastUpdatedTimeSettingKeyName = "LastUpdatedTime";
         private string accelerationAlarmSettingKeyName = "AccelerationAlarmSetting";
         private string idleTimeAccelerationAlarmSettingKeyName = "IdleTimeAccelerationAlarmSetting";
-        private string phoneNumberFavoriteContactSettingKeyName = "PhoneNumberFavoriteContactSetting";      
+        private string phoneNumberFavoriteContactSettingKeyName = "PhoneNumberFavoriteContactSetting";
+        private string orientationPortraitSettingKeyName = "OrientationPortraitSetting";
 
         // Default values of our settings
         private bool initialLaunchSettingDefault = true;
@@ -26,13 +27,15 @@ namespace AssistantFallDetector.Entities
         private double accelerationAlarmSettingDefault = 1.5;
         private uint idleTimeAccelerationAlarmSettingDefault = 3000;
         private string phoneNumberFavoriteContactSettingDefault = null;
+        private bool orientationPortraitSettingDefault = true;
 
         // Isolated storage key names
         private bool initialLaunchSetting;
         private string lastUpdatedTimeSetting;
         private double accelerationAlarmSetting;
         private uint idleTimeAccelerationAlarmSetting;
-        private string phoneNumberFavoriteContactSetting;  
+        private string phoneNumberFavoriteContactSetting;
+        private bool orientationPortraitSetting;
 
 
         public ApplicationSettingsData()
@@ -69,6 +72,12 @@ namespace AssistantFallDetector.Entities
             set { phoneNumberFavoriteContactSettingKeyName = value; }
         }
 
+        public string OrientationPortraitSettingKeyName
+        {
+            get { return orientationPortraitSettingKeyName; }
+            set { orientationPortraitSettingKeyName = value; }
+        }
+
 
         public bool InitialLaunchSettingDefault
         {
@@ -100,6 +109,12 @@ namespace AssistantFallDetector.Entities
             set { phoneNumberFavoriteContactSettingDefault = value; }
         }
 
+        public bool OrientationPortraitSettingDefault
+        {
+            get { return orientationPortraitSettingDefault; }
+            set { orientationPortraitSettingDefault = value; }
+        }
+
 
         public bool InitialLaunchSetting
         {
@@ -129,6 +144,12 @@ namespace AssistantFallDetector.Entities
         {
             get { return phoneNumberFavoriteContactSetting; }
             set { phoneNumberFavoriteContactSetting = value; }
+        }
+
+        public bool OrientationPortraitSetting
+        {
+            get { return orientationPortraitSetting; }
+            set { orientationPortraitSetting = value; }
         }
     }
 }

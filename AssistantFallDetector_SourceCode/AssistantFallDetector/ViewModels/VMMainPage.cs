@@ -2,37 +2,34 @@
 using AssistantFallDetector.Services;
 using AssistantFallDetector.ViewModels.Base;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Windows.Devices.Geolocation;
-using System.ServiceModel;
-using Windows.UI.Core;
 using System.Collections.ObjectModel;
 using Microsoft.Devices;
-using System.IO.IsolatedStorage;
 using Microsoft.Phone.UserData;
+using Microsoft.Phone.Tasks;
 
 namespace AssistantFallDetector.ViewModels
 {
     public class VMMainPage : VMBase
     {
+        private IDispatcherService dispatcherService;
+
         private INavigationService navService;
 
         private IApplicationSettingsService applicationSettingsService;
         private ApplicationSettingsData applicationSettingsData;
 
         private IAccelerometerService accelerometerService;
-        private IDispatcherService dispatcherService;
         private AccelerometerData accelerometerData;
         private AccelerometerMaxData accelerometerMaxData;
         private AccelerometerGraphData accelerometerGraphData;
         
         private ObservableCollection<string> coordinates = new ObservableCollection<string>();
         private IGpsService gpsService;
+        private GpsData gpsData;
 
         private ISmsService smsService;
         private SmsData smsData;
@@ -60,8 +57,10 @@ namespace AssistantFallDetector.ViewModels
 
         private DelegateCommand ackAlarmCommand;
         private DelegateCommand sendNotificationAlarmCommand;
+        private DelegateCommand showLocationMapCommand;
         private Lazy<DelegateCommand<string>> searchContactsCommand;
         private Lazy<DelegateCommand<object>> navigateToContactDetailsPageCommand;
+        private DelegateCommand aboutCommand;
 
         private ContactPhoneNumber telefono;
 
@@ -81,15 +80,16 @@ namespace AssistantFallDetector.ViewModels
 
             ackAlarmCommand = new DelegateCommand(AckAlarmCommandExecute, AckAlarmCommandCanExecute);
             sendNotificationAlarmCommand = new DelegateCommand(SendNotificationAlarmCommandExecute, SendNotificationAlarmCommandCanExecute);
+            showLocationMapCommand = new DelegateCommand(ShowLocationMapCommandExecute, ShowLocationMapCommandCanExecute);
             searchContactsCommand = new Lazy<DelegateCommand<string>>(
                 () =>
                     new DelegateCommand<string>(SearchContactsCommandExecute, SearchContactsCommandCanExecute)
             );
-
             navigateToContactDetailsPageCommand = new Lazy<DelegateCommand<object>>(
                 () =>
                     new DelegateCommand<object>(NavigateToContactDetailsPageCommandExecute, NavigateToContactDetailsPageCommandCanExecute)
             );
+            aboutCommand = new DelegateCommand(AboutCommandExecute, AboutCommandCanExecute);
 
             iVibrateController = VibrateController.Default;
             
@@ -102,11 +102,14 @@ namespace AssistantFallDetector.ViewModels
                 this.applicationSettingsData.InitialLaunchSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.InitialLaunchSettingKeyName, this.applicationSettingsData.InitialLaunchSettingDefault);
                 this.applicationSettingsData.LastUpdatedTimeSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.LastUpdatedTimeSettingKeyName, this.applicationSettingsData.LastUpdatedTimeSettingDefault);
                 this.applicationSettingsData.PhoneNumberFavoriteContactSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.PhoneNumberFavoriteContactSettingKeyName, this.applicationSettingsData.PhoneNumberFavoriteContactSettingDefault);
+                this.applicationSettingsData.OrientationPortraitSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.OrientationPortraitSettingKeyName, this.applicationSettingsData.OrientationPortraitSettingDefault);
 
                 this.accelerometerService.InitializeAccelerometer();
 
                 this.accelerometerMaxData = new AccelerometerMaxData();
                 this.accelerometerGraphData = new AccelerometerGraphData();
+
+                this.gpsData = new GpsData();
                 
             }
             catch (NotSupportedException exception)
@@ -284,6 +287,17 @@ namespace AssistantFallDetector.ViewModels
             }
         }
 
+        public bool OrientationPortraitSetting
+        {
+            get { return applicationSettingsData.OrientationPortraitSetting; }
+            set
+            {
+                applicationSettingsData.OrientationPortraitSetting = value;
+                RaisePropertyChanged();
+                applicationSettingsService.AddOrUpdateValue(applicationSettingsData.OrientationPortraitSettingKeyName, value);
+            }
+        }
+
         public ICommand AckAlarmCommand
         {
             get { return ackAlarmCommand; }
@@ -312,7 +326,7 @@ namespace AssistantFallDetector.ViewModels
 
             smsData = new SmsData();
             smsData.Number = applicationSettingsData.PhoneNumberFavoriteContactSetting;
-            smsData.Text = Resources.AppResources.NotificationAlarmText;
+            smsData.Text = Resources.AppResources.NotificationAlarmText + "\n" + gpsData.ToString();
             var result = this.smsService.SendSMS(smsData);
 
         }
@@ -343,6 +357,8 @@ namespace AssistantFallDetector.ViewModels
                                                         result.Latitude,
                                                         result.Longitude);
                 Coordinates.Add(coordinates);
+
+                gpsData.SetGpsData(result.Timestamp.ToUniversalTime(), result.Latitude, result.Longitude);
             }
         }
 
@@ -358,8 +374,28 @@ namespace AssistantFallDetector.ViewModels
                                                         coord.Longitude);
 
                     Coordinates.Add(coordinates);
+
+                    gpsData.SetGpsData(coord.Timestamp.ToUniversalTime(), coord.Latitude, coord.Longitude);
                 });
             }
+        }
+
+        public ICommand ShowLocationMapCommand
+        {
+            get { return showLocationMapCommand; }
+        }
+
+        public void ShowLocationMapCommandExecute()
+        {
+            MapsTask map = new MapsTask();
+            map.ZoomLevel = 15;            
+            map.Center = gpsData.GetGpsData();
+            map.Show();           
+        }
+
+        public bool ShowLocationMapCommandCanExecute()
+        {
+                return true;
         }
 
         public ICommand SearchContactsCommand
@@ -452,6 +488,31 @@ namespace AssistantFallDetector.ViewModels
                 PhoneNumberFavoriteContactSetting = telefono.PhoneNumber;
                 //RaisePropertyChanged();
             }
+        }
+
+        public ICommand AboutCommand
+        {
+            get { return aboutCommand; }
+        }
+
+        public void AboutCommandExecute()
+        {
+            //String appVersion = System.Reflection.Assembly.GetExecutingAssembly()
+            //        .FullName.Split('=')[1].Split(',')[0];
+            System.Version version = new System.Reflection.AssemblyName(System.Reflection.Assembly.GetExecutingAssembly().FullName).Version;
+
+            string appName = Resources.AppResources.ApplicationTitle;
+            string author = "David Eiroa Menasalvas";
+
+            MessageBox.Show(appName + "\n\n" 
+                + "version: " + version.ToString() + "\n\n" 
+                + author);
+
+        }
+
+        public bool AboutCommandCanExecute()
+        {
+            return true;
         }
 
     }

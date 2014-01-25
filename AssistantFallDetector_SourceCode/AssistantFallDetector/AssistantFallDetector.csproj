@@ -101,6 +101,7 @@
     <Compile Include="Entities\ApplicationSettingsData.cs" />
     <Compile Include="Entities\AccelerometerMaxData.cs" />
     <Compile Include="Entities\ContactsData.cs" />
+    <Compile Include="Entities\GpsData.cs" />
     <Compile Include="Entities\SmsData.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Services\INavigationService.cs" />
@@ -150,6 +151,8 @@
   <ItemGroup>
     <None Include="AssistantFallDetector_2013_12_23_21_04_28.sap" />
     <None Include="AssistantFallDetector_2013_12_23_21_12_42.sap" />
+    <None Include="Images\Icons\Vector\basic_shellcommon_vectors.ai" />
+    <None Include="Images\Icons\Vector\License.rtf" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
@@ -158,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />
+    <Content Include="Assets\ApplicationBarIconAbout.png" />
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -177,6 +181,83 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\disclaimer.png" />
+    <Content Include="Images\Icons\Dark\add.png" />
+    <Content Include="Images\Icons\Dark\back.png" />
+    <Content Include="Images\Icons\Dark\basecircle.png" />
+    <Content Include="Images\Icons\Dark\cancel.png" />
+    <Content Include="Images\Icons\Dark\check.png" />
+    <Content Include="Images\Icons\Dark\close.png" />
+    <Content Include="Images\Icons\Dark\DarkIcons.dll" />
+    <Content Include="Images\Icons\Dark\delete.png" />
+    <Content Include="Images\Icons\Dark\download.png" />
+    <Content Include="Images\Icons\Dark\edit.png" />
+    <Content Include="Images\Icons\Dark\favs.addto.png" />
+    <Content Include="Images\Icons\Dark\favs.png" />
+    <Content Include="Images\Icons\Dark\feature.alarm.png" />
+    <Content Include="Images\Icons\Dark\feature.calendar.png" />
+    <Content Include="Images\Icons\Dark\feature.camera.png" />
+    <Content Include="Images\Icons\Dark\feature.email.png" />
+    <Content Include="Images\Icons\Dark\feature.phone.png" />
+    <Content Include="Images\Icons\Dark\feature.search.png" />
+    <Content Include="Images\Icons\Dark\feature.settings.png" />
+    <Content Include="Images\Icons\Dark\feature.video.png" />
+    <Content Include="Images\Icons\Dark\folder.png" />
+    <Content Include="Images\Icons\Dark\like.png" />
+    <Content Include="Images\Icons\Dark\microphone.png" />
+    <Content Include="Images\Icons\Dark\minus.png" />
+    <Content Include="Images\Icons\Dark\new.png" />
+    <Content Include="Images\Icons\Dark\next.png" />
+    <Content Include="Images\Icons\Dark\overflowdots.png" />
+    <Content Include="Images\Icons\Dark\questionmark.png" />
+    <Content Include="Images\Icons\Dark\refresh.png" />
+    <Content Include="Images\Icons\Dark\save.png" />
+    <Content Include="Images\Icons\Dark\share.png" />
+    <Content Include="Images\Icons\Dark\stop.png" />
+    <Content Include="Images\Icons\Dark\sync.png" />
+    <Content Include="Images\Icons\Dark\transport.ff.png" />
+    <Content Include="Images\Icons\Dark\transport.pause.png" />
+    <Content Include="Images\Icons\Dark\transport.play.png" />
+    <Content Include="Images\Icons\Dark\transport.rew.png" />
+    <Content Include="Images\Icons\Dark\upload.png" />
+    <Content Include="Images\Icons\Light\add.png" />
+    <Content Include="Images\Icons\Light\back.png" />
+    <Content Include="Images\Icons\Light\basecircle.png" />
+    <Content Include="Images\Icons\Light\cancel.png" />
+    <Content Include="Images\Icons\Light\check.png" />
+    <Content Include="Images\Icons\Light\close.png" />
+    <Content Include="Images\Icons\Light\delete.png" />
+    <Content Include="Images\Icons\Light\download.png" />
+    <Content Include="Images\Icons\Light\edit.png" />
+    <Content Include="Images\Icons\Light\favs.addto.png" />
+    <Content Include="Images\Icons\Light\favs.png" />
+    <Content Include="Images\Icons\Light\feature.alarm.png" />
+    <Content Include="Images\Icons\Light\feature.calendar.png" />
+    <Content Include="Images\Icons\Light\feature.camera.png" />
+    <Content Include="Images\Icons\Light\feature.email.png" />
+    <Content Include="Images\Icons\Light\feature.phone.png" />
+    <Content Include="Images\Icons\Light\feature.search.png" />
+    <Content Include="Images\Icons\Light\feature.settings.png" />
+    <Content Include="Images\Icons\Light\feature.video.png" />
+    <Content Include="Images\Icons\Light\folder.png" />
+    <Content Include="Images\Icons\Light\LightIcons.dll" />
+    <Content Include="Images\Icons\Light\like.png" />
+    <Content Include="Images\Icons\Light\microphone.png" />
+    <Content Include="Images\Icons\Light\minus.png" />
+    <Content Include="Images\Icons\Light\new.png" />
+    <Content Include="Images\Icons\Light\next.png" />
+    <Content Include="Images\Icons\Light\overflowdots.png" />
+    <Content Include="Images\Icons\Light\questionmark.png" />
+    <Content Include="Images\Icons\Light\refresh.png" />
+    <Content Include="Images\Icons\Light\save.png" />
+    <Content Include="Images\Icons\Light\share.png" />
+    <Content Include="Images\Icons\Light\stop.png" />
+    <Content Include="Images\Icons\Light\sync.png" />
+    <Content Include="Images\Icons\Light\transport.ff.png" />
+    <Content Include="Images\Icons\Light\transport.pause.png" />
+    <Content Include="Images\Icons\Light\transport.play.png" />
+    <Content Include="Images\Icons\Light\transport.rew.png" />
+    <Content Include="Images\Icons\Light\upload.png" />
+    <Content Include="Images\Icons\Vector\Vectors.dll" />
     <Content Include="README_FIRST.txt" />
     <Content Include="SplashScreenImage.jpg" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />

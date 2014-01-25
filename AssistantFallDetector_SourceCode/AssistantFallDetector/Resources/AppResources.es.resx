@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!--
-    Microsoft ResX Schema
-
+  <!-- 
+    Microsoft ResX Schema 
+    
     Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
     associated with the data types.
-
+    
     Example:
-
+    
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-
-    There are any number of "resheader" rows that contain simple
+                
+    There are any number of "resheader" rows that contain simple 
     name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
     mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
     read any of the formats listed below.
-
+    
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
+    value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -125,7 +125,157 @@
     <value>es</value>
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
-  
-  
-  
-<data name="AppBarButtonText" xml:space="preserve"><value>añadir</value></data><data name="AppBarMenuItemText" xml:space="preserve"><value>Elemento de menú</value></data><data name="ApplicationTitle" xml:space="preserve"><value>Asistente de detector de caídas</value></data><data name="MainPageAccelerometerTitleText" xml:space="preserve"><value>acelerómetro</value></data><data name="MainPageSettingsTitleText" xml:space="preserve"><value>ajustes</value></data><data name="MainPageAppBarRefreshText" xml:space="preserve"><value>actualizar</value></data><data name="MainPageLocationTitleText" xml:space="preserve"><value>ubicación</value></data><data name="MainPageContactsTitleText" xml:space="preserve"><value>contactos</value></data><data name="MainPageSettingsWifiText" xml:space="preserve"><value>WiFi</value></data><data name="MainPageAccelerometerStatusText" xml:space="preserve"><value>estado</value></data><data name="MainPageAccelerometerAccelerationMaxText" xml:space="preserve"><value>aceleración máxima alcanzada (G)</value></data><data name="MainPageAccelerometerZAxisText" xml:space="preserve"><value>Eje Z (G)</value></data><data name="MainPageAccelerometerYAxisText" xml:space="preserve"><value>Eje Y (G)</value></data><data name="MainPageAccelerometerXAxisText" xml:space="preserve"><value>Eje X (G)</value></data><data name="MainPageAccelerometerTimeUpdatesText" xml:space="preserve"><value>tiempo entre actualizaciones (ms)</value></data><data name="MainPageAccelerometerAccelerationText" xml:space="preserve"><value>aceleración (G)</value></data><data name="MainPageSettingsAccelerationAlarmText" xml:space="preserve"><value>Alarma de aceleración (G)</value></data><data name="MainPageSettingsAccelerometerModeText" xml:space="preserve"><value>acelerómetro</value></data><data name="MainPageLocationGPSBckgTitleText" xml:space="preserve"><value>Coordenadas</value></data><data name="MainPageContactsSearchFilterText" xml:space="preserve"><value>búsqueda</value></data><data name="MainPageContactsResultsLabelText" xml:space="preserve"><value>Buscar contactos</value></data><data name="MainPageContactsPhoneFilterText" xml:space="preserve"><value>teléfono</value></data><data name="MainPageContactsNameFilterText" xml:space="preserve"><value>nombre</value></data><data name="MainPageContactsEmailFilterText" xml:space="preserve"><value>email</value></data><data name="MainPagePopupSendNotificationButtonText" xml:space="preserve"><value>enviar notificación</value></data><data name="MainPagePopupAckButtonText" xml:space="preserve"><value>reconocer</value></data><data name="MainPagePopupTitleText" xml:space="preserve"><value>Aviso</value></data><data name="MainPagePopupDescriptionText" xml:space="preserve"><value>¡el umbral de alarma ha sido sobrepasado!</value></data><data name="NotificationAlarmText" xml:space="preserve"><value>El umbral de alarma ha sido sobrepasado</value></data><data name="MainPageSettingsPhoneNumberFavoriteContactText" xml:space="preserve"><value>número de teléfono del contacto favorito</value></data><data name="MainPageContactsLoadingLabelText3" xml:space="preserve"><value>no hay resultados</value></data><data name="MainPageContactsLoadingLabelText2" xml:space="preserve"><value>resultados (seleccione un contacto para ver los detalles...)</value></data><data name="MainPageContactsLoadingLabelText1" xml:space="preserve"><value>los resultados se están cargando...</value></data><data name="ContactDetailsPageDialogLeftButtonText" xml:space="preserve"><value>continuar</value></data><data name="ContactDetailsPageDialogMessage3" xml:space="preserve"><value>ha sido añadido para el envío de alarmas.</value></data><data name="ContactDetailsPageDialogMessage2" xml:space="preserve"><value>del contacto seleccionado</value></data><data name="ContactDetailsPageDialogMessage1" xml:space="preserve"><value>El número</value></data><data name="MainPageSettingsIdleTimeAccelerationAlarmText" xml:space="preserve"><value>Tiempo parado antes de lanzar la notificación (ms)</value></data><data name="MainPageAccelerometerStateAlarmText3" xml:space="preserve"><value>tiempo de inactividad alcanzado</value></data><data name="MainPageAccelerometerStateAlarmText2" xml:space="preserve"><value>umbral alcanzado</value></data><data name="MainPageAccelerometerStateAlarmText1" xml:space="preserve"><value>normal</value></data><data name="MainPageAccelerometerStateAlarmText" xml:space="preserve"><value>fase de reconocimiento de alarma</value></data><data name="ContactDetailsPageDialogCaption" xml:space="preserve"><value>Número favorito</value></data><data name="ContactDetailsPageTitleText" xml:space="preserve"><value>contacto</value></data><data name="ContactDetailsPageWebSitesText" xml:space="preserve"><value>sitios web</value></data><data name="ContactDetailsPagePhoneNumbersText" xml:space="preserve"><value>números de teléfono</value></data><data name="ContactDetailsPageEmailsAddressesText" xml:space="preserve"><value>direcciones de correo electrónico</value></data><data name="ContactDetailsCompanyInformationText" xml:space="preserve"><value>información de la compañia</value></data><data name="ContactDetailsAccountsText" xml:space="preserve"><value>cuentas</value></data></root>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>Asistente de detector de caídas</value>
+  </data>
+  <data name="AppBarButtonText" xml:space="preserve">
+    <value>añadir</value>
+  </data>
+  <data name="AppBarMenuItemText" xml:space="preserve">
+    <value>Elemento de menú</value>
+  </data>
+  <data name="MainPageAccelerometerTitleText" xml:space="preserve">
+    <value>acelerómetro</value>
+  </data>
+  <data name="MainPageAppBarRefreshText" xml:space="preserve">
+    <value>actualizar</value>
+  </data>
+  <data name="MainPageContactsTitleText" xml:space="preserve">
+    <value>contactos</value>
+  </data>
+  <data name="MainPageLocationTitleText" xml:space="preserve">
+    <value>ubicación</value>
+  </data>
+  <data name="MainPageSettingsTitleText" xml:space="preserve">
+    <value>ajustes</value>
+  </data>
+  <data name="MainPageAccelerometerAccelerationMaxText" xml:space="preserve">
+    <value>aceleración máxima alcanzada (G)</value>
+  </data>
+  <data name="MainPageAccelerometerAccelerationText" xml:space="preserve">
+    <value>aceleración (G)</value>
+  </data>
+  <data name="MainPageAccelerometerStatusText" xml:space="preserve">
+    <value>estado</value>
+  </data>
+  <data name="MainPageAccelerometerTimeUpdatesText" xml:space="preserve">
+    <value>tiempo entre actualizaciones (ms)</value>
+  </data>
+  <data name="MainPageAccelerometerXAxisText" xml:space="preserve">
+    <value>Eje X (G)</value>
+  </data>
+  <data name="MainPageAccelerometerYAxisText" xml:space="preserve">
+    <value>Eje Y (G)</value>
+  </data>
+  <data name="MainPageAccelerometerZAxisText" xml:space="preserve">
+    <value>Eje Z (G)</value>
+  </data>
+  <data name="MainPageSettingsAccelerationAlarmText" xml:space="preserve">
+    <value>Alarma de aceleración (G)</value>
+  </data>
+  <data name="MainPageSettingsWifiText" xml:space="preserve">
+    <value>WiFi</value>
+  </data>
+  <data name="MainPageSettingsAccelerometerModeText" xml:space="preserve">
+    <value>acelerómetro</value>
+  </data>
+  <data name="MainPageLocationGPSBckgTitleText" xml:space="preserve">
+    <value>Coordenadas</value>
+  </data>
+  <data name="MainPageContactsEmailFilterText" xml:space="preserve">
+    <value>email</value>
+  </data>
+  <data name="MainPageContactsNameFilterText" xml:space="preserve">
+    <value>nombre</value>
+  </data>
+  <data name="MainPageContactsPhoneFilterText" xml:space="preserve">
+    <value>teléfono</value>
+  </data>
+  <data name="MainPageContactsResultsLabelText" xml:space="preserve">
+    <value>Buscar contactos</value>
+  </data>
+  <data name="MainPageContactsSearchFilterText" xml:space="preserve">
+    <value>búsqueda</value>
+  </data>
+  <data name="ContactDetailsPageTitleText" xml:space="preserve">
+    <value>contacto</value>
+  </data>
+  <data name="MainPagePopupAckButtonText" xml:space="preserve">
+    <value>reconocer</value>
+  </data>
+  <data name="MainPagePopupDescriptionText" xml:space="preserve">
+    <value>¡el umbral de alarma ha sido sobrepasado!</value>
+  </data>
+  <data name="MainPagePopupSendNotificationButtonText" xml:space="preserve">
+    <value>enviar notificación</value>
+  </data>
+  <data name="MainPagePopupTitleText" xml:space="preserve">
+    <value>Aviso</value>
+  </data>
+  <data name="NotificationAlarmText" xml:space="preserve">
+    <value>El umbral de alarma ha sido sobrepasado</value>
+  </data>
+  <data name="MainPageSettingsPhoneNumberFavoriteContactText" xml:space="preserve">
+    <value>número de teléfono del contacto favorito</value>
+  </data>
+  <data name="MainPageContactsLoadingLabelText1" xml:space="preserve">
+    <value>los resultados se están cargando...</value>
+  </data>
+  <data name="MainPageContactsLoadingLabelText2" xml:space="preserve">
+    <value>resultados (seleccione un contacto para ver los detalles...)</value>
+  </data>
+  <data name="MainPageContactsLoadingLabelText3" xml:space="preserve">
+    <value>no hay resultados</value>
+  </data>
+  <data name="ContactDetailsPageDialogCaption" xml:space="preserve">
+    <value>Número favorito</value>
+  </data>
+  <data name="ContactDetailsPageDialogLeftButtonText" xml:space="preserve">
+    <value>continuar</value>
+  </data>
+  <data name="ContactDetailsPageDialogMessage1" xml:space="preserve">
+    <value>El número</value>
+  </data>
+  <data name="ContactDetailsPageDialogMessage2" xml:space="preserve">
+    <value>del contacto seleccionado</value>
+  </data>
+  <data name="ContactDetailsPageDialogMessage3" xml:space="preserve">
+    <value>ha sido añadido para el envío de alarmas.</value>
+  </data>
+  <data name="MainPageSettingsIdleTimeAccelerationAlarmText" xml:space="preserve">
+    <value>Tiempo parado antes de lanzar la notificación (ms)</value>
+  </data>
+  <data name="MainPageAccelerometerStateAlarmText2" xml:space="preserve">
+    <value>umbral alcanzado</value>
+  </data>
+  <data name="MainPageAccelerometerStateAlarmText3" xml:space="preserve">
+    <value>tiempo de inactividad alcanzado</value>
+  </data>
+  <data name="MainPageAccelerometerStateAlarmText1" xml:space="preserve">
+    <value>normal</value>
+  </data>
+  <data name="MainPageAccelerometerStateAlarmText" xml:space="preserve">
+    <value>fase de reconocimiento de alarma</value>
+  </data>
+  <data name="ContactDetailsAccountsText" xml:space="preserve">
+    <value>cuentas</value>
+  </data>
+  <data name="ContactDetailsCompanyInformationText" xml:space="preserve">
+    <value>información de la compañia</value>
+  </data>
+  <data name="ContactDetailsPageEmailsAddressesText" xml:space="preserve">
+    <value>direcciones de correo electrónico</value>
+  </data>
+  <data name="ContactDetailsPagePhoneNumbersText" xml:space="preserve">
+    <value>números de teléfono</value>
+  </data>
+  <data name="ContactDetailsPageWebSitesText" xml:space="preserve">
+    <value>sitios web</value>
+  </data>
+  <data name="MainPageLocationMapButtonText" xml:space="preserve">
+    <value>ver ubicación</value>
+  </data>
+  <data name="MainPageSettingsOrientationPortraitText" xml:space="preserve">
+    <value>Orientación vertical</value>
+  </data>
+<data name="AssemblyVersion" xml:space="preserve"><value>Versión de ensamblado</value></data></root>
