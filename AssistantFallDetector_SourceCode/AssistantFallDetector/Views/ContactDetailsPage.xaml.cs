@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Phone.Controls;
 using System.Windows.Media.Imaging;
-using AssistantFallDetector.Entities;
+using AssistantFallDetector.Models;
 using System.Windows.Controls;
 using System.Windows;
 using AssistantFallDetector.Resources;

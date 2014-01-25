@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AssistantFallDetector.Entities
+namespace AssistantFallDetector.Models
 {
     public class GpsData
     {

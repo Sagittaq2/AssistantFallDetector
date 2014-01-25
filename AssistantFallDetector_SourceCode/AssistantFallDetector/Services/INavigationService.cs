@@ -8,6 +8,8 @@ namespace AssistantFallDetector.Services
 {
     public interface INavigationService
     {
+        void ClearNavigationHistory();
+
         void NavigateToContactDetailsPage(object contact);
 
         void NavigateToMainPage(object telefono);

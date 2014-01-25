@@ -96,13 +96,13 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ContactToPictureConverter.cs" />
-    <Compile Include="Entities\AccelerometerData.cs" />
-    <Compile Include="Entities\AccelerometerGraphData.cs" />
-    <Compile Include="Entities\ApplicationSettingsData.cs" />
-    <Compile Include="Entities\AccelerometerMaxData.cs" />
-    <Compile Include="Entities\ContactsData.cs" />
-    <Compile Include="Entities\GpsData.cs" />
-    <Compile Include="Entities\SmsData.cs" />
+    <Compile Include="Models\AccelerometerData.cs" />
+    <Compile Include="Models\AccelerometerGraphData.cs" />
+    <Compile Include="Models\ApplicationSettingsData.cs" />
+    <Compile Include="Models\AccelerometerMaxData.cs" />
+    <Compile Include="Models\ContactsData.cs" />
+    <Compile Include="Models\GpsData.cs" />
+    <Compile Include="Models\SmsData.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\NavigationService.cs" />

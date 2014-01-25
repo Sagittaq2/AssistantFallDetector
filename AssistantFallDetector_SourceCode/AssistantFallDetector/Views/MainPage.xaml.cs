@@ -10,7 +10,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.UserData;
 using Microsoft.Phone.Shell;
 using AssistantFallDetector.Resources;
-using AssistantFallDetector.Entities;
+using AssistantFallDetector.Models;
 using AssistantFallDetector.ViewModels;
 
 namespace AssistantFallDetector
@@ -41,22 +41,6 @@ namespace AssistantFallDetector
             //    // App has initialized for the first time.
             //    ApplicationSettingsData.InitialLaunchSetting = false;
             //}
-
-            if (e.NavigationMode == NavigationMode.New)
-            {
-                ApplicationBar appBar = new ApplicationBar
-                {
-                    Mode = ApplicationBarMode.Minimized,
-                };
-
-                ApplicationBarMenuItem refreshMenu = new ApplicationBarMenuItem(AppResources.MainPageAppBarRefreshText);
-
-                //refreshMenu.Click += OnRefreshClick;
-
-                appBar.MenuItems.Add(refreshMenu);
-
-                //this.ApplicationBar = appBar;
-            }
 
         }
 

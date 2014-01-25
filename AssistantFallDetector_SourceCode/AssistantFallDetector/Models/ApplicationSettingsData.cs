@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using AssistantFallDetector.ViewModels.Base;
 
-namespace AssistantFallDetector.Entities
+namespace AssistantFallDetector.Models
 {
     public class ApplicationSettingsData
     {

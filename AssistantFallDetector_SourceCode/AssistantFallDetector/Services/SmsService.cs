@@ -1,4 +1,4 @@
-﻿using AssistantFallDetector.Entities;
+﻿using AssistantFallDetector.Models;
 using Microsoft.Phone.Tasks;
 using System;
 using System.Collections.Generic;

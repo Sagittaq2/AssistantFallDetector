@@ -8,7 +8,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using AssistantFallDetector.Resources;
 using System.Windows.Threading;
-using AssistantFallDetector.Entities;
+using AssistantFallDetector.Models;
 
 namespace AssistantFallDetector
 {
@@ -68,8 +68,6 @@ namespace AssistantFallDetector
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
-
-            //ApplicationSettings = new ApplicationSettingsData();
 
         }
 

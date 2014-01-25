@@ -64,6 +64,7 @@ namespace AssistantFallDetector.ViewModels
                     case CustomMessageBoxResult.LeftButton:
                         // Do something.
                         this.navService.NavigateToMainPage(telefono);
+                        this.navService.ClearNavigationHistory();
                         break;
                     case CustomMessageBoxResult.RightButton:
                         // Do something.
@@ -83,6 +84,8 @@ namespace AssistantFallDetector.ViewModels
 
         public bool NavigateToMainPageCommandCanExecute(object telefono)
         {
+            if (telefono == null)
+                return false;
             return true;
         }
 

@@ -1,4 +1,4 @@
-﻿using AssistantFallDetector.Entities;
+﻿using AssistantFallDetector.Models;
 using AssistantFallDetector.Services;
 using AssistantFallDetector.ViewModels.Base;
 using System;

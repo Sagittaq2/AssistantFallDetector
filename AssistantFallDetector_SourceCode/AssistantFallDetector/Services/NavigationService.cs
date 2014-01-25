@@ -1,10 +1,12 @@
 ﻿using AssistantFallDetector.ViewModels;
+using Microsoft.Phone.Controls;
 using Microsoft.Phone.UserData;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Navigation;
 
 namespace AssistantFallDetector.Services
@@ -12,6 +14,13 @@ namespace AssistantFallDetector.Services
     public class NavigationService : INavigationService
     {
         private Action<NavigationEventArgs> onNavigated;
+
+        // Limpia el historial de navegación entre páginas
+        public void ClearNavigationHistory()
+        {
+            PhoneApplicationFrame rootFrame = Application.Current.RootVisual as PhoneApplicationFrame;
+            while (rootFrame.RemoveBackEntry() != null) ;
+        }
 
         public void NavigateToContactDetailsPage(object contact)
         {
