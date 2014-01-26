@@ -1,10 +1,6 @@
-﻿using AssistantFallDetector.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
 using System.IO.IsolatedStorage;
-using System.Linq;
-using System.Text;
 
 namespace AssistantFallDetector.Services
 {

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace AssistantFallDetector.ViewModels.Base
@@ -12,6 +8,11 @@ namespace AssistantFallDetector.ViewModels.Base
         private Action execute;
         private Func<bool> canExecute;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="execute">Method to execute with the command</param>
+        /// <param name="canExecute">Method evaluates whether the command is executed</param>
         public DelegateCommand(Action execute, Func<bool> canExecute)
         {
             this.execute = execute;
@@ -25,7 +26,6 @@ namespace AssistantFallDetector.ViewModels.Base
 
             return true;
         }
-
 
         public event EventHandler CanExecuteChanged;
 
@@ -41,6 +41,10 @@ namespace AssistantFallDetector.ViewModels.Base
         }
     }
 
+    /// <summary>
+    /// Allow sends an object to a command
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class DelegateCommand<T> : ICommand
     {
         private Action<T> execute;
@@ -59,7 +63,6 @@ namespace AssistantFallDetector.ViewModels.Base
 
             return canExecute((T)parameter);
         }
-
 
         public event EventHandler CanExecuteChanged;
 

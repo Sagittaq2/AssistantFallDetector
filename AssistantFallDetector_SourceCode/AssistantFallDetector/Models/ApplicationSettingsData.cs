@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.IO.IsolatedStorage;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using AssistantFallDetector.ViewModels.Base;
-
-namespace AssistantFallDetector.Models
+﻿namespace AssistantFallDetector.Models
 {
     public class ApplicationSettingsData
     {

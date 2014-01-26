@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
-using Windows.Foundation;
 
 namespace AssistantFallDetector.Services
 {
@@ -12,9 +7,9 @@ namespace AssistantFallDetector.Services
 
     public interface IGpsService
     {
-        event PositionChangedArg GpsPositionChanged;
-
         Task<Geocoordinate> GetGpsCoordinates();
         Task<CivicAddress> GetGpsCivicAddress();
+
+        event PositionChangedArg GpsPositionChanged;
     }
 }

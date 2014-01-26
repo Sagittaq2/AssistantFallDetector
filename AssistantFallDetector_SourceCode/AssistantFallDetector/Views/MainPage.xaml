@@ -23,7 +23,9 @@
     </phone:PhoneApplicationPage.Resources>
 
     <phone:Pivot x:Name="MyPivot" Title="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}">
+        <!--Accelerometer view-->
         <phone:PivotItem Header="{Binding LocalizedResources.MainPageAccelerometerTitleText, Source={StaticResource LocalizedStrings}}">
+            <!--Fall detected popup-->
             <StackPanel x:Name="ContentPanel" Margin="12,0,12,0">
                 <Popup x:Name="Popup" IsOpen="{Binding Popup}" >
                     <Border  BorderThickness="2" Margin="10" BorderBrush="Green">
@@ -81,21 +83,20 @@
         </phone:PivotItem>
         
         <phone:PivotItem Header="{Binding LocalizedResources.MainPageLocationTitleText, Source={StaticResource LocalizedStrings}}">
+            <!--Locations view-->
             <Grid x:Name="LayoutRoot" Background="Transparent">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-
-                <!--TitlePanel contains the name of the application and page title-->
+                <!--Show location button-->
                 <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
                     <Button Content="{Binding LocalizedResources.MainPageLocationMapButtonText, Source={StaticResource LocalizedStrings}}" 
                         Command="{Binding ShowLocationMapCommand}" />
                     <TextBlock Text="{Binding LocalizedResources.MainPageLocationGPSBckgTitleText, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" Margin="0"
                        FontSize="22"/>
                 </StackPanel>
-
-                <!--ContentPanel - place additional content here-->
+                <!--Content to add GPS Coordinates-->
                 <Grid x:Name="ContentPanel2" Grid.Row="1" Margin="12,0,12,0">
                     <ListBox ItemsSource="{Binding Coordinates}"
                      FontSize="22">
@@ -105,11 +106,12 @@
         </phone:PivotItem>
 
         <phone:PivotItem Header="{Binding LocalizedResources.MainPageContactsTitleText, Source={StaticResource LocalizedStrings}}">
-             <StackPanel Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+            <!--Contacts view--> 
+            <StackPanel Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                 <TextBox x:Name="contactFilterString" />
                 <Button Content="{Binding LocalizedResources.MainPageContactsSearchFilterText, Source={StaticResource LocalizedStrings}}" 
                         Command="{Binding SearchContactsCommand}" CommandParameter="{Binding ElementName=contactFilterString,Path=Text}" />
-
+                <!--ListBox for contacts list -->
                 <TextBlock x:Name="contactResultsLabel" Text="{Binding StateContactsSearch}" TextWrapping="Wrap" Margin="12,0,0,0" />
                 <ListBox x:Name="contactResultsData" ItemsSource="{Binding ContactsData}"  Height="400" ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <i:Interaction.Triggers>
@@ -133,7 +135,7 @@
         </phone:PivotItem>
 
         <phone:PivotItem Header="{Binding LocalizedResources.MainPageSettingsTitleText, Source={StaticResource LocalizedStrings}}">
-            <!--Settings resources-->               
+            <!--Settings view-->               
             <StackPanel Orientation="Vertical">
  
                 <TextBlock Text="{Binding LocalizedResources.MainPageSettingsAccelerationAlarmText, Source={StaticResource LocalizedStrings}}" />                

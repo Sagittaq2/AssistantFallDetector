@@ -9,7 +9,7 @@
     <!--Application Resources-->
     <Application.Resources>
         <locator:VMLocator x:Key="Locator"></locator:VMLocator>
-        <local:LocalizedStrings xmlns:local="clr-namespace:AssistantFallDetector" x:Key="LocalizedStrings"/>
+        <local:LocalizedStrings xmlns:local="clr-namespace:AssistantFallDetector.Resources" x:Key="LocalizedStrings"/>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

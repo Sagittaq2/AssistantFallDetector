@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.Foundation;
 using Windows.Devices.Geolocation;
 
 namespace AssistantFallDetector.Services
@@ -14,6 +10,9 @@ namespace AssistantFallDetector.Services
 
         Geolocator locator;
 
+        /// <summary>
+        /// Initialization of GPS sensor
+        /// </summary>
         public GpsService()
         {
             locator = new Geolocator();
@@ -22,6 +21,11 @@ namespace AssistantFallDetector.Services
             locator.PositionChanged += locator_PositionChanged;
         }
 
+        /// <summary>
+        /// GPS event when the position changes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         void locator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
             if (GpsPositionChanged != null)
@@ -30,6 +34,10 @@ namespace AssistantFallDetector.Services
             }
         }
 
+        /// <summary>
+        /// Gets actual location of GPS in Geocoordinates
+        /// </summary>
+        /// <returns></returns>
         public async Task<Geocoordinate> GetGpsCoordinates()
         {
             var position = await locator.GetGeopositionAsync();
@@ -37,6 +45,10 @@ namespace AssistantFallDetector.Services
             return position.Coordinate;
         }
 
+        /// <summary>
+        /// Gets actual location of GPS in CivicAddress
+        /// </summary>
+        /// <returns></returns>
         public async Task<CivicAddress> GetGpsCivicAddress()
         {
             var position = await locator.GetGeopositionAsync();

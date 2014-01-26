@@ -103,7 +103,7 @@
     <Compile Include="Models\ContactsData.cs" />
     <Compile Include="Models\GpsData.cs" />
     <Compile Include="Models\SmsData.cs" />
-    <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="Resources\LocalizedStrings.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
@@ -149,8 +149,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Include="AssistantFallDetector_2013_12_23_21_04_28.sap" />
-    <None Include="AssistantFallDetector_2013_12_23_21_12_42.sap" />
     <None Include="Images\Icons\Vector\basic_shellcommon_vectors.ai" />
     <None Include="Images\Icons\Vector\License.rtf" />
     <None Include="packages.config" />
@@ -258,7 +256,7 @@
     <Content Include="Images\Icons\Light\transport.rew.png" />
     <Content Include="Images\Icons\Light\upload.png" />
     <Content Include="Images\Icons\Vector\Vectors.dll" />
-    <Content Include="README_FIRST.txt" />
+    <Content Include="Toolkit.Content\README_FIRST.txt" />
     <Content Include="SplashScreenImage.jpg" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />

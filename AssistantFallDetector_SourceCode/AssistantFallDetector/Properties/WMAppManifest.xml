@@ -5,7 +5,7 @@
     <Language code="es" />
     <Language code="qps-ploc" />
   </Languages>
-  <App xmlns="" ProductID="{71698298-6227-4e31-b543-fd45e6e90e4d}" Title="Assistant Fall Detector" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="AssistantFallDetector author" Description="Prototype application to detect accelerations of the device.&#xD;&#xA;Detects accelerations that reaches a threshold defined by user and sends a SMS to a favorite contact with the GPS coordinates of the current location." Publisher="AssistantFallDetector" PublisherID="{911e7f55-339e-4b63-b1f3-ceeddf8e3d1a}">
+  <App xmlns="" ProductID="{71698298-6227-4e31-b543-fd45e6e90e4d}" Title="Assistant Fall Detector" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="David Eiroa Menasalvas" Description="Prototype application to detect accelerations of the device.&#xD;&#xA;Detects accelerations that reaches a threshold defined by user and sends a SMS to a favorite contact with the GPS coordinates of the current location." Publisher="AssistantFallDetector" PublisherID="{911e7f55-339e-4b63-b1f3-ceeddf8e3d1a}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
@@ -29,7 +29,7 @@
           <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
-          <Title>AssistantFallDetector</Title>
+          <Title>Assistant Fall Detector</Title>
           <BackContent>
           </BackContent>
           <BackBackgroundImageURI>

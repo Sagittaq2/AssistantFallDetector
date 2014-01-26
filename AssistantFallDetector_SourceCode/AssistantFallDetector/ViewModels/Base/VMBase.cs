@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AssistantFallDetector.ViewModels.Base
 {
@@ -16,10 +12,22 @@ namespace AssistantFallDetector.ViewModels.Base
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Trigger PropertyChanged event with the property modified
+        /// </summary>
+        /// <param name="propertyName"></param>
         public void RaisePropertyChanged([CallerMemberName]string propertyName = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// <summary>
+        /// Refresh all view values bound with the ViewModel
+        /// </summary>
+        public void UpdateAll()
+        {
+            RaisePropertyChanged(String.Empty);
         }
     }
 }

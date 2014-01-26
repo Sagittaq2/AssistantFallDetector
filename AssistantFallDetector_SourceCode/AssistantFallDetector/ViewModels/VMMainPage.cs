@@ -53,7 +53,7 @@ namespace AssistantFallDetector.ViewModels
         private DateTime StartedTimeStamp;
         private bool StartedAlarmAck = false;
 
-        private bool popup;
+        private bool popup = false;
 
         private DelegateCommand ackAlarmCommand;
         private DelegateCommand sendNotificationAlarmCommand;
@@ -66,6 +66,7 @@ namespace AssistantFallDetector.ViewModels
 
         public VMMainPage(INavigationService navService, IApplicationSettingsService applicationSettingsService, IAccelerometerService accelerometerService, IGpsService gpsService, ISmsService smsService, IDispatcherService dispatcherService)
         {
+            // Enlazamos a los servicios
             this.navService = navService;
             this.applicationSettingsService = applicationSettingsService;
             this.accelerometerService = accelerometerService;
@@ -73,11 +74,13 @@ namespace AssistantFallDetector.ViewModels
             this.smsService = smsService;
             this.dispatcherService = dispatcherService;
 
+            // Registramos los eventos del acelerómetro y del GPS
             this.accelerometerService.AccelerometerReadingChanged += accelerometerService_AccelerometerReadingChanged;
             this.gpsService.GpsPositionChanged += gpsService_GpsPositionChanged;
            
-            Popup = false;
+            //Popup = false;
 
+            // Creamos los comandos que se van a usar
             ackAlarmCommand = new DelegateCommand(AckAlarmCommandExecute, AckAlarmCommandCanExecute);
             sendNotificationAlarmCommand = new DelegateCommand(SendNotificationAlarmCommandExecute, SendNotificationAlarmCommandCanExecute);
             showLocationMapCommand = new DelegateCommand(ShowLocationMapCommandExecute, ShowLocationMapCommandCanExecute);
@@ -92,25 +95,24 @@ namespace AssistantFallDetector.ViewModels
             aboutCommand = new DelegateCommand(AboutCommandExecute, AboutCommandCanExecute);
 
             iVibrateController = VibrateController.Default;
-            
+
+            //Se cargan todos los parámetro de configuración
+            this.applicationSettingsService.LoadApplicationSettings();
+            this.applicationSettingsData = new ApplicationSettingsData();
+            this.applicationSettingsData.AccelerationAlarmSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.AccelerationAlarmSettingKeyName, this.applicationSettingsData.AccelerationAlarmSettingDefault);
+            this.applicationSettingsData.IdleTimeAccelerationAlarmSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.IdleTimeAccelerationAlarmSettingKeyName, this.applicationSettingsData.IdleTimeAccelerationAlarmSettingDefault);
+            this.applicationSettingsData.InitialLaunchSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.InitialLaunchSettingKeyName, this.applicationSettingsData.InitialLaunchSettingDefault);
+            this.applicationSettingsData.LastUpdatedTimeSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.LastUpdatedTimeSettingKeyName, this.applicationSettingsData.LastUpdatedTimeSettingDefault);
+            this.applicationSettingsData.PhoneNumberFavoriteContactSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.PhoneNumberFavoriteContactSettingKeyName, this.applicationSettingsData.PhoneNumberFavoriteContactSettingDefault);
+            this.applicationSettingsData.OrientationPortraitSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.OrientationPortraitSettingKeyName, this.applicationSettingsData.OrientationPortraitSettingDefault);
+
+            //Acelerómetro
             try
             {
-                this.applicationSettingsService.LoadApplicationSettings();
-                this.applicationSettingsData = new ApplicationSettingsData();
-                this.applicationSettingsData.AccelerationAlarmSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.AccelerationAlarmSettingKeyName, this.applicationSettingsData.AccelerationAlarmSettingDefault);
-                this.applicationSettingsData.IdleTimeAccelerationAlarmSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.IdleTimeAccelerationAlarmSettingKeyName, this.applicationSettingsData.IdleTimeAccelerationAlarmSettingDefault);
-                this.applicationSettingsData.InitialLaunchSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.InitialLaunchSettingKeyName, this.applicationSettingsData.InitialLaunchSettingDefault);
-                this.applicationSettingsData.LastUpdatedTimeSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.LastUpdatedTimeSettingKeyName, this.applicationSettingsData.LastUpdatedTimeSettingDefault);
-                this.applicationSettingsData.PhoneNumberFavoriteContactSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.PhoneNumberFavoriteContactSettingKeyName, this.applicationSettingsData.PhoneNumberFavoriteContactSettingDefault);
-                this.applicationSettingsData.OrientationPortraitSetting = applicationSettingsService.GetValueOrDefault(this.applicationSettingsData.OrientationPortraitSettingKeyName, this.applicationSettingsData.OrientationPortraitSettingDefault);
-
+                //Se inicializa el acelerómetro y los modelos asociados
                 this.accelerometerService.InitializeAccelerometer();
-
                 this.accelerometerMaxData = new AccelerometerMaxData();
-                this.accelerometerGraphData = new AccelerometerGraphData();
-
-                this.gpsData = new GpsData();
-                
+                this.accelerometerGraphData = new AccelerometerGraphData();             
             }
             catch (NotSupportedException exception)
             {
@@ -118,8 +120,13 @@ namespace AssistantFallDetector.ViewModels
                 MessageBox.Show(exception.Message);
             }
 
+            //GPS
             try
             {
+                // Se inicializa el GPS
+                this.gpsData = new GpsData();
+
+                //Recogemos la posición actual del dispositivo
                 this.GetPositionGPS();
             }
             catch (NotSupportedException exception)
@@ -167,23 +174,34 @@ namespace AssistantFallDetector.ViewModels
                 accelerometerGraphData.ZLineY2 = accelerometerGraphData.ZLineY1 + accelerometerData.ZAxis * 50;
                 AGraphData = accelerometerGraphData;
 
+                //ALGORITMO PARA DETECTAR CAÍDAS
+                //==============================
+                //Se evalúa si la aceleración actual sobrepasa la configurada en la aplicación y también si ya hay en proceso una identificación de caída
                 if ((AData.Acceleration > applicationSettingsData.AccelerationAlarmSetting) && (!StartedAlarmAck))
                 {
-                    //ToDo: Tiempo que debe permanecer en reposo antes de dar la alarma.
+                    //Si se detecta una posible caída se almacena el tiempo en que empieza la identificación 
+                    //y se marca como inicio de identificación de caída.
                     StartedTimeStamp = DateTime.Now;
                     StartedAlarmAck = true;
                     StateAlarm = Resources.AppResources.MainPageAccelerometerStateAlarmText2;
                 }
                 else
                 {
+                    //Se evalúa si ya hay iniciado un proceso de posible caída aunque no se haya sobrepasado el umbral en esta lectura
                     if (StartedAlarmAck)
                     {
+                        //Si ya hay iniciado un proceso revisamos si la aceleración actual está dentro de umbrales LA y HA 
+                        //de esta manera podemos detectar que hay aceleraciones del dispositivo pero que son despreciables y está parado
                         if ((LA < AData.Acceleration) && (AData.Acceleration < HA))
                         {
                             IdleTime = (DateTime.Now - StartedTimeStamp);
+                            //Se evalúa si desde que se sobrepasó el umbral si ha pasado el tiempo configurado para poder reconocer la alarma por parte el usuari
                             if (IdleTime.TotalMilliseconds > applicationSettingsData.IdleTimeAccelerationAlarmSetting)
                             {
+                                //Si se ha sobrepasado el tiempo y el dispositivo no ha sufrido aceleraciones perceptibles significa que está parado.
+                                //SE DETECTA UNA CAÍDA
                                 StateAlarm = Resources.AppResources.MainPageAccelerometerStateAlarmText3;
+                                //Se muestra una pantalla al usuario para que pueda reconocer la alarma y cancelar el envío de notificación al contacto favorito
                                 Popup = true;
                                 iVibrateController.Start(TimeSpan.FromSeconds(1));
                                 StartedAlarmAck = false;
@@ -191,8 +209,12 @@ namespace AssistantFallDetector.ViewModels
                         }
                         else
                         {
+                            //Miramos si han pasado 500ms desde que se detectó la caída, para evitar falsos positivos por aceleraciones extras.                            
                             if ((DateTime.Now - StartedTimeStamp).TotalMilliseconds > 500)
                             {
+                                //Si han pasado más de 500ms y el dispositivo ha tenido una aceleración apreciable fuera de los umbrales LA y HA 
+                                //significa que el dispositivo no está parado por lo que cancelamos el proceso de detección de la caída.
+                                //SE CANCELA LA CAÍDA
                                 StartedAlarmAck = false;
                                 StateAlarm = Resources.AppResources.MainPageAccelerometerStateAlarmText1;
                             }
@@ -204,6 +226,7 @@ namespace AssistantFallDetector.ViewModels
             });
         }
 
+        //Propiedades relacionadas con el acelerómetro enlazadas a la vista
         public AccelerometerData AData
         {
             get { return this.accelerometerData; }
@@ -254,14 +277,19 @@ namespace AssistantFallDetector.ViewModels
             }
         }
 
+        //Propiedades relacionadas con los ajustes enlazadas a la vista
         public double AccelerationAlarmSetting
         {
             get { return applicationSettingsData.AccelerationAlarmSetting; }
             set
             {
                 applicationSettingsData.AccelerationAlarmSetting = value;
-                RaisePropertyChanged();
-                applicationSettingsService.AddOrUpdateValue(applicationSettingsData.AccelerationAlarmSettingKeyName, value);
+                
+                if (applicationSettingsService.AddOrUpdateValue(applicationSettingsData.AccelerationAlarmSettingKeyName, value))
+                {
+                    RaisePropertyChanged();
+                    applicationSettingsService.Save();
+                }
             }
         }
 
@@ -271,8 +299,12 @@ namespace AssistantFallDetector.ViewModels
             set
             {
                 applicationSettingsData.IdleTimeAccelerationAlarmSetting = value;
-                RaisePropertyChanged();
-                applicationSettingsService.AddOrUpdateValue(applicationSettingsData.IdleTimeAccelerationAlarmSettingKeyName, value);
+
+                if (applicationSettingsService.AddOrUpdateValue(applicationSettingsData.IdleTimeAccelerationAlarmSettingKeyName, value))
+                {
+                    RaisePropertyChanged();
+                    applicationSettingsService.Save();
+                }
             }
         }
 
@@ -282,8 +314,12 @@ namespace AssistantFallDetector.ViewModels
             set
             {
                 applicationSettingsData.PhoneNumberFavoriteContactSetting = value;
-                RaisePropertyChanged();
-                applicationSettingsService.AddOrUpdateValue(applicationSettingsData.PhoneNumberFavoriteContactSettingKeyName, value);
+                
+                if (applicationSettingsService.AddOrUpdateValue(applicationSettingsData.PhoneNumberFavoriteContactSettingKeyName, value))
+                {
+                    RaisePropertyChanged();
+                    applicationSettingsService.Save();
+                }
             }
         }
 
@@ -293,11 +329,16 @@ namespace AssistantFallDetector.ViewModels
             set
             {
                 applicationSettingsData.OrientationPortraitSetting = value;
-                RaisePropertyChanged();
-                applicationSettingsService.AddOrUpdateValue(applicationSettingsData.OrientationPortraitSettingKeyName, value);
+
+                if (applicationSettingsService.AddOrUpdateValue(applicationSettingsData.OrientationPortraitSettingKeyName, value))
+                {
+                    RaisePropertyChanged();
+                    applicationSettingsService.Save();
+                }
             }
         }
 
+        //Comando para reconocer una alarma
         public ICommand AckAlarmCommand
         {
             get { return ackAlarmCommand; }
@@ -314,6 +355,7 @@ namespace AssistantFallDetector.ViewModels
             return true;
         }
 
+        //Comando para enviar la notificación al contacto favorito
         public ICommand SendNotificationAlarmCommand
         {
             get { return sendNotificationAlarmCommand; }
@@ -336,6 +378,7 @@ namespace AssistantFallDetector.ViewModels
             return true;
         }
 
+        //Propiedades relacionadas con el GPS enlazadas a la vista
         public ObservableCollection<string> Coordinates
         {
             get { return coordinates; }
@@ -380,6 +423,7 @@ namespace AssistantFallDetector.ViewModels
             }
         }
 
+        //Comando para visualizar las coordenadas en la aplicación de mapas de WP8
         public ICommand ShowLocationMapCommand
         {
             get { return showLocationMapCommand; }
@@ -398,6 +442,7 @@ namespace AssistantFallDetector.ViewModels
                 return true;
         }
 
+        //Comando para buscar contactos en la agenda del dispositivo
         public ICommand SearchContactsCommand
         {
             get { return searchContactsCommand.Value; }
@@ -438,6 +483,7 @@ namespace AssistantFallDetector.ViewModels
             return true;
         }
 
+        //Propiedades relacionadas con la búsqueda de contactos enlazadas a la vista
         public ObservableCollection<Contact> ContactsData
         {
             get
@@ -461,6 +507,7 @@ namespace AssistantFallDetector.ViewModels
             }
         }
 
+        //Comando para navegar a la página de detalles del contacto con el contacto seleccionado
         public ICommand NavigateToContactDetailsPageCommand
         {
             get { return navigateToContactDetailsPageCommand.Value; }
@@ -476,6 +523,7 @@ namespace AssistantFallDetector.ViewModels
             return true;
         }
 
+        //Propiedad con el teléfono del contacto favorito que se rellena desde VMContactDetails al navegar hacia la página principal
         public ContactPhoneNumber Telefono
         {
             get
@@ -486,10 +534,10 @@ namespace AssistantFallDetector.ViewModels
             {
                 telefono = value;
                 PhoneNumberFavoriteContactSetting = telefono.PhoneNumber;
-                //RaisePropertyChanged();
             }
         }
 
+        //Comando para mostrar la versión de la aplicación
         public ICommand AboutCommand
         {
             get { return aboutCommand; }

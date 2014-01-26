@@ -18,7 +18,7 @@
         <note from="MultilingualBuild" annotates="source" priority="2">Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</note></trans-unit>
         <trans-unit id="Resx/ApplicationTitle" translate="yes" xml:space="preserve">
           <source>Assistant Fall Detector</source>
-          <target state="translated">Asistente de detector de caídas</target>
+          <target state="translated">Asistente y detector de caídas</target>
         </trans-unit>
         <trans-unit id="Resx/AppBarButtonText" translate="yes" xml:space="preserve">
           <source>add</source>

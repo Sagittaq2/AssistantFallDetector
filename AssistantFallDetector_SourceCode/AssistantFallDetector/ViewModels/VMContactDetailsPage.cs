@@ -24,7 +24,9 @@ namespace AssistantFallDetector.ViewModels
                     new DelegateCommand<object>(NavigateToMainPageCommandExecute, NavigateToMainPageCommandCanExecute)
             );
         }
-
+        /// <summary>
+        /// Method with the contact sent from VMMainPage
+        /// </summary>
         public Contact Contact
         {
             get
@@ -38,6 +40,9 @@ namespace AssistantFallDetector.ViewModels
             }
         }
 
+        /// <summary>
+        /// Command to navigate to MainPage
+        /// </summary>
         public ICommand NavigateToMainPageCommand
         {
             get { return navigateToMainPageCommand.Value; }
@@ -47,6 +52,7 @@ namespace AssistantFallDetector.ViewModels
         {
             ContactPhoneNumber telef = (ContactPhoneNumber)telefono;
 
+            //Configuration to show a MessageBox with the favorite phone number
             CustomMessageBox messageBox = new CustomMessageBox()
             {
                 Caption = Resources.AppResources.ContactDetailsPageDialogCaption,
@@ -62,8 +68,9 @@ namespace AssistantFallDetector.ViewModels
                 switch (e1.Result)
                 {
                     case CustomMessageBoxResult.LeftButton:
-                        // Do something.
+                        // Navegar a la página principal pasando el teléfono del favorito
                         this.navService.NavigateToMainPage(telefono);
+                        // Se limpia el historial para no volver a la página de contactos desde la página principal
                         this.navService.ClearNavigationHistory();
                         break;
                     case CustomMessageBoxResult.RightButton:
@@ -84,6 +91,7 @@ namespace AssistantFallDetector.ViewModels
 
         public bool NavigateToMainPageCommandCanExecute(object telefono)
         {
+            //Si no existe el teléfono no se navega a la página principal
             if (telefono == null)
                 return false;
             return true;

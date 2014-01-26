@@ -1,9 +1,5 @@
 ﻿using AssistantFallDetector.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Devices.Sensors;
 
 namespace AssistantFallDetector.Services
@@ -13,9 +9,11 @@ namespace AssistantFallDetector.Services
         public event AccelerometerReadData AccelerometerReadingChanged;
 
         Accelerometer accelerometer;
-        //private const double G = 0.981;
         private const double G = 1;
 
+        /// <summary>
+        /// Accelerometer initialization
+        /// </summary>
         public void InitializeAccelerometer()
         {
             accelerometer = Accelerometer.GetDefault();
@@ -26,6 +24,11 @@ namespace AssistantFallDetector.Services
             accelerometer.ReadingChanged += accelerometer_ReadingChanged;
         }
 
+        /// <summary>
+        /// Accelerometer event when data accelerometer changes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         void accelerometer_ReadingChanged(Accelerometer sender, AccelerometerReadingChangedEventArgs args)
         {
             if (args.Reading != null)
@@ -41,12 +44,13 @@ namespace AssistantFallDetector.Services
 
                 if (AccelerometerReadingChanged != null)
                     AccelerometerReadingChanged(data);
-
-                //Mirar si se ha alcanzado el umbral y enviar notificación Raw
-
             }
         }
 
+        /// <summary>
+        /// Gets actual data of accelerometer
+        /// </summary>
+        /// <returns></returns>
         public AccelerometerData GetAccelerometerRead()
         {
             if (accelerometer == null)

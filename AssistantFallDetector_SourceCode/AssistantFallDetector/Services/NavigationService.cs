@@ -2,10 +2,6 @@
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.UserData;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Navigation;
 
@@ -15,13 +11,19 @@ namespace AssistantFallDetector.Services
     {
         private Action<NavigationEventArgs> onNavigated;
 
-        // Limpia el historial de navegación entre páginas
+        /// <summary>
+        /// Clear the navigation history
+        /// </summary>
         public void ClearNavigationHistory()
         {
             PhoneApplicationFrame rootFrame = Application.Current.RootVisual as PhoneApplicationFrame;
             while (rootFrame.RemoveBackEntry() != null) ;
         }
 
+        /// <summary>
+        /// Navigation from MainPage to ContactDetailsPage
+        /// </summary>
+        /// <param name="contact">Favorite contact</param>
         public void NavigateToContactDetailsPage(object contact)
         {
             this.onNavigated = (e) =>
@@ -34,6 +36,10 @@ namespace AssistantFallDetector.Services
             App.RootFrame.Navigate(new Uri("/Views/ContactDetailsPage.xaml", UriKind.Relative));
         }
 
+        /// <summary>
+        /// Navigation from ContactDetailsPage to MainPage
+        /// </summary>
+        /// <param name="telefono">Favorite contact phone</param>
         public void NavigateToMainPage(object telefono)
         {
             this.onNavigated = (e) =>
@@ -46,6 +52,11 @@ namespace AssistantFallDetector.Services
             App.RootFrame.Navigate(new Uri("/Views/MainPage.xaml?goto=3", UriKind.Relative));
         }
 
+        /// <summary>
+        /// Navigation event when navigate to a new page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void RootFrame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
             App.RootFrame.Navigated -= RootFrame_Navigated;
