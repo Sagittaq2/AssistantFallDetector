@@ -50,6 +50,11 @@ namespace AssistantFallDetector
             viewModel.AboutCommand.Execute(null);
         }
 
+        private void MediaElement1_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         // Sample code for building a localized ApplicationBar
         //private void BuildLocalizedApplicationBar()
         //{

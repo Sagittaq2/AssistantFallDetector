@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using Microsoft.Devices;
 using Microsoft.Phone.UserData;
 using Microsoft.Phone.Tasks;
+using System.Windows.Controls;
 
 namespace AssistantFallDetector.ViewModels
 {
@@ -63,6 +64,8 @@ namespace AssistantFallDetector.ViewModels
         private DelegateCommand aboutCommand;
 
         private ContactPhoneNumber telefono;
+
+        private Uri alarmAudio;
 
         public VMMainPage(INavigationService navService, IApplicationSettingsService applicationSettingsService, IAccelerometerService accelerometerService, IGpsService gpsService, ISmsService smsService, IDispatcherService dispatcherService)
         {
@@ -204,6 +207,11 @@ namespace AssistantFallDetector.ViewModels
                                 //Se muestra una pantalla al usuario para que pueda reconocer la alarma y cancelar el envío de notificación al contacto favorito
                                 Popup = true;
                                 iVibrateController.Start(TimeSpan.FromSeconds(1));
+
+                                // HACK for MediaElement: to force it to play a new source, set source to null then put the real source URI. 
+                                AlarmAudio = null;
+                                AlarmAudio = new Uri("Assets/Bocina.mp3", UriKind.Relative);
+
                                 StartedAlarmAck = false;
                             }
                         }
@@ -561,6 +569,20 @@ namespace AssistantFallDetector.ViewModels
         public bool AboutCommandCanExecute()
         {
             return true;
+        }
+
+        //Property to play audio file
+        public Uri AlarmAudio
+        {
+            get { return this.alarmAudio; }
+            private set
+            {
+                if (this.alarmAudio != value)
+                {
+                    this.alarmAudio = value;
+                    this.RaisePropertyChanged();
+                }
+            }
         }
 
     }

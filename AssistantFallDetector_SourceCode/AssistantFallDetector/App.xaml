@@ -4,12 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:locator="clr-namespace:AssistantFallDetector.ViewModels.Base">
+    xmlns:locator="clr-namespace:AssistantFallDetector.ViewModels.Base"
+    xmlns:local="clr-namespace:AssistantFallDetector.Resources">
 
     <!--Application Resources-->
     <Application.Resources>
         <locator:VMLocator x:Key="Locator"></locator:VMLocator>
-        <local:LocalizedStrings xmlns:local="clr-namespace:AssistantFallDetector.Resources" x:Key="LocalizedStrings"/>
+        <local:LocalizedStrings  x:Key="LocalizedStrings"/>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>
